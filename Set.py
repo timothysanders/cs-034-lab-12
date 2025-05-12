@@ -1,8 +1,8 @@
-Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
+#Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
 
-Date: 5/11/25
+#Date: 5/11/25
 
-Course: Spr25_CS_034 CRN 39575
+#Course: Spr25_CS_034 CRN 39575
 
 class Set:
     def __init__(self, get_key_function=None):
