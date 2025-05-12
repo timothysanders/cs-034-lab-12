@@ -54,6 +54,7 @@ Submit as `design.pdf` (or `design.md`).
 | Testing coverage (5 pt)                | ≥90% coverage, meaningful unit tests                      | ≥75% coverage                            | Some tests, major methods are untested      | No or very few tests               |
 | Code quality & style (5 pt)            | Well-documented, follows style guide, clean               | Mostly clean, minor style issues         | Some style violations or sparse comments    | Hard to follow, no comments        |
 | README & usability (5 pt)              | Clear build/run instructions, sample runs                 | Works, but minor omissions in the README | README incomplete, user must guess commands | No README or unusable instructions |
+
 Submission Instructions:
 - Package your design and code into a single zip: `Module12_<GroupName>.zip`
 - Include a top-level `README.md` Listing group members and roles.
