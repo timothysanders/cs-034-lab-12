@@ -5,7 +5,7 @@
 #Course: Spr25_CS_034 CRN 39575
 
 
-''''
+
 # Revised Implement from Megan
 #-------------------------------
 import csv
@@ -43,25 +43,25 @@ class BSTNode:
             if self.right:
                 self.right.parent = self
 
-class BSTIterator:
-    def __init__(self, root):
+#class BSTIterator:
+    #def __init__(self, root):
         # Start at the leftmost (minimum) node
-        self.node = self._min_node(root)
+        #self.node = self._min_node(root)
 
-    def _min_node(self, node):
-        while node and node.left:
-            node = node.left
-        return node
+    #def _min_node(self, node):
+        #while node and node.left:
+            #node = node.left
+        #return node
 
-    def __iter__(self):
-        return self
+    #def __iter__(self):
+        #return self
 
-    def __next__(self):
-        if not self.node:
-            raise StopIteration()
-        current = self.node.element
-        self.node = self.node.get_successor()
-        return current
+    #def __next__(self):
+        #if not self.node:
+            #raise StopIteration()
+        #current = self.node.element
+        #self.node = self.node.get_successor()
+        #return current
 
 
 class Set:
@@ -152,16 +152,29 @@ class Set:
                 result.add(el)
         return result
 
-    def __iter__(self):
-        return BSTIterator(self.storage_root)
+    #def __iter__(self):
+        #return BSTIterator(self.storage_root)
+
+    # Prefer this implementation other than the one applying BSTIterator
+    
+    def iter(self):
+        yield from self._in_order(self.storage_root)
+
+    def _in_order(self, node):
+        if node:
+            yield from self._in_order(node.left)
+            yield node.key
+            yield from self._in_order(node.right)
 
     def to_list(self):
         return list(iter(self))
 
+
+
 def get_student_id(student):
     return student
 
-''''
+
 
 #=======================================================================================================================================
 
