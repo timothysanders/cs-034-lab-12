@@ -65,9 +65,9 @@ class BSTIterator:
 
 
 class Set:
-    def __init__(self, get_key_function=None):
+    def __init__(self, get_student_record_key=None):
         self.storage_root = None
-        self.get_key = get_key_function if get_key_function else lambda el: el
+        self.get_key = get_student_record_key( if get_student_record_key else lambda el: el
 
     def add(self, new_element):
         new_key = self.get_key(new_element)
