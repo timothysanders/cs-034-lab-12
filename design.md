@@ -26,9 +26,9 @@ Fields:
 
 Behaviors:  
                
-                add()             remove()            __iter__()
-                _in_order_with_elements()             contains()
-                union()           intersection()                  difference()
+                add()                       remove()            __iter__()
+                _in_order_with_elements()                       contains()
+                union()                     intersection()      difference()
                 to_list()
 
 
