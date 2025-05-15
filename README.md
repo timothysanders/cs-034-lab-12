@@ -47,14 +47,6 @@ Submit as `design.pdf` (or `design.md`).
 ### Implement Set class with Standard BST 
 In this lab, our primary focus is demonstrating set operations—union, intersection, difference—through a custom implementation of a Set class for a Course Enrollment Manager. While hash-table-based Sets offer excellent average O(1) performance, in realistic systems, their performance can potentially degrade due to hash collision. Since our goal is not to achieve the fastest set operations, we will implement our Set class using a binary search tree (BST) instead of a hash table. This approach ensures reasonably efficient operations with O(log N) time complexity and provides the benefit of being able to iterate over students in sorted order, such as by ID. To keep the BST implementation straightforward and as simple as possible—without adding balancing logic like that found in Treaps, AVL trees, or Red-Black trees—we will use a standard, unbalanced BST. This choice avoids unnecessary complexity for small to medium-sized datasets, which is suitable for our demo purposes.
 
-### Design Rubric (25 points)
-| Criterion                          | Excellent (5)                                           | Good (4)                 | Fair (3)                               | Poor (≤2)                              |
-|------------------------------------|---------------------------------------------------------|--------------------------|----------------------------------------|----------------------------------------|
-| UML/CRC completeness (5 pt)        | All classes, methods, and attributes are clearly shown  | Minor omissions          | Missing one class or key method        | Major omissions or incorrect structure |
-| Pseudocode clarity (5 pt)          | Detailed, easy-to-follow pseudocode for every op        | Mostly clear, minor gaps | Some operations are missing or unclear | Little or no pseudocode provided       |
-| Data-flow sketch (5 pt)            | Clearly shows all major data movements                  | Mostly clear             | Missing one or two data flows          | Absent or very confusing sketch        |
-| Rationale & discussion (5 pt)      | Explains trade-offs (e.g., underlying structure choice) | Some rationale           | Rationale is shallow or incomplete     | No rationale                           |
-| Organization & presentation (5 pt) | Professional formatting, error-free                     | A few formatting issues  | Some typos/structure problems          | Hard to read, disorganized             |
 
 ## 4. Implementation
 ### Deliverables
@@ -64,6 +56,18 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
   - Two sample CSV files (`courseA.csv`, `courseB.csv`)
   - `README.md` With build/run instructions and sample output
 - Automated tests for your Set methods (using `unittest`, `pytest`, `JUnit`, etc.)
+
+### Design Rubric (25 points)
+| Criterion                          | Excellent (5)                                           | Good (4)                 | Fair (3)                               | Poor (≤2)                              |
+|------------------------------------|---------------------------------------------------------|--------------------------|----------------------------------------|----------------------------------------|
+| UML/CRC completeness (5 pt)        | All classes, methods, and attributes are clearly shown  | Minor omissions          | Missing one class or key method        | Major omissions or incorrect structure |
+| Pseudocode clarity (5 pt)          | Detailed, easy-to-follow pseudocode for every op        | Mostly clear, minor gaps | Some operations are missing or unclear | Little or no pseudocode provided       |
+| Data-flow sketch (5 pt)            | Clearly shows all major data movements                  | Mostly clear             | Missing one or two data flows          | Absent or very confusing sketch        |
+| Rationale & discussion (5 pt)      | Explains trade-offs (e.g., underlying structure choice) | Some rationale           | Rationale is shallow or incomplete     | No rationale                           |
+| Organization & presentation (5 pt) | Professional formatting, error-free                     | A few formatting issues  | Some typos/structure problems          | Hard to read, disorganized             |
+
+
+
 ### Implementation Rubric (35 points)
 | Criterion                              | Excellent (7)                                             | Good (6)                                 | Fair (4-5)                                  | Poor (≤3)                          |
 |----------------------------------------|-----------------------------------------------------------|------------------------------------------|---------------------------------------------|------------------------------------|
