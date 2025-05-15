@@ -4,8 +4,9 @@
 
 #Course: Spr25_CS_034 CRN 39575
 from Set import BSTNode
-from Set import BSTSet
+from Set import Set
 from course_manager import CourseEnrollment
+from course_manager import get_student_id
 
 if __name__ == "__main__":
     course_a = CourseEnrollment()
