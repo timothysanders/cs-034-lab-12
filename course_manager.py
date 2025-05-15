@@ -6,14 +6,179 @@
 
 
 import csv
-from bst import BSTSet
+import random
 
-def get_student_record_key(student):
-    return student["id"]
+class BSTNode:
+    def __init__(self, element, key, parent=None):
+        self.key = key
+        self.element = element
+        self.parent = parent
+        self.left = None
+        self.right = None
 
-class CourseEnrollmentExtended:
+    def __str__(self):
+        return f"({self.key}, {self.element})"
+
+    def get_successor(self):
+        """
+        Returns the in-order successor of this node in the BST.
+        """
+        # If right child exists, successor is the leftmost node in right subtree
+        if self.right:
+            successor = self.right
+            while successor.left:
+                successor = successor.left
+            return successor
+        else:
+            current = self
+            while current.parent and current == current.parent.right:
+                current = current.parent
+            return current.parent
+
+    def get_predecessor(self):
+        """
+        Returns the in-order predecessor of this node in the BST.
+        """
+        # Case 1: If left child exists, go down to rightmost node in left subtree
+        if self.left:
+            predecessor = self.left
+            while predecessor.right:
+                predecessor = predecessor.right
+            return predecessor
+        else:
+            current = self
+            while current.parent and current == current.parent.left:
+                current = current.parent
+            return current.parent
+
+
+class BSTSet:
+    def __init__(self, get_key_function=None):
+        self.storage_root = None
+        self.get_key = get_key_function if get_key_function else lambda el: el
+
+
+    def __iter__(self):
+        yield from self._in_order_with_elements(self.storage_root)
+
+    
+    def _in_order_with_elements(self, node):
+        if node:
+            yield from self._in_order_with_elements(node.left)
+            yield node.element
+            yield from self._in_order_with_elements(node.right)
+
+
+    def to_list(self):
+        return list(iter(self))
+
+
+    def add(self, new_element):
+        new_element_key = self.get_key(new_element)
+
+        def _insert(node, element, key):
+            if not node:
+                return BSTNode(element, key)
+            if key < node.key:
+                node.left = _insert(node.left, element, key)
+                if node.left:
+                    node.left.parent = node
+            elif key > node.key:
+                node.right = _insert(node.right, element, key)
+                if node.right:
+                    node.right.parent = node
+            return node
+
+        self.storage_root = _insert(self.storage_root, new_element, new_element_key)
+
+    
+    def contains(self, element):
+        key = self.get_key(element)
+
+        def _search(node, key):
+            if not node:
+                return False
+            if key == node.key:
+                return True
+            elif key < node.key:
+                return _search(node.left, key)
+            else:
+                return _search(node.right, key)
+
+        return _search(self.storage_root, key)
+
+    
+    def remove(self, element):
+        key = self.get_key(element)
+
+        def _delete(node, key):
+            if not node:
+                return None
+            if key < node.key:
+                node.left = _delete(node.left, key)
+            elif key > node.key:
+                node.right = _delete(node.right, key)
+            else:
+                if not node.left:
+                    return node.right
+                elif not node.right:
+                    return node.left
+                successor = node.get_successor()
+                node.key = successor.key
+                node.element = successor.element
+                node.right = _delete(node.right, successor.key)
+            return node
+
+        self.storage_root = _delete(self.storage_root, key)
+
+    
+    def union(self, other_set):
+        result = BSTSet(self.get_key)
+        for element in self:
+            result.add(element)
+        for element in other_set:
+            result.add(element)
+        return result
+
+    
+    def intersection(self, other_set):
+        result = BSTSet(self.get_key)
+        for element in self:
+            if other_set.contains(element):
+                result.add(element)
+        return result
+
+
+    def difference(self, other_set):
+        result = BSTSet(self.get_key)
+        for element in self:
+            if not other_set.contains(element):
+                result.add(element)
+        return result
+
+
+
+def get_student_id(student):
+    return student['id']
+
+
+class CourseEnrollment:
     def __init__(self):
-        self.students = BSTSet(get_student_record_key)
+        self.students = BSTSet(get_student_id)
+        self.courses = BSTSet()
+
+
+    def write_roster(self, filename):
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for student in self.students:
+                writer.writerow(['Student ID', 'Student Name', 'Courses'])
+
+    def read_roster(self, filename):
+        with open(filename, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                student_id, student_name, courses = row
 
     def add_student(self, student):
         self.students.add(student)
@@ -21,8 +186,11 @@ class CourseEnrollmentExtended:
     def remove_student(self, student):
         self.students.remove(student)
 
-    def find_student(self, student):
-        return self.students.contains(student)
+    def find_student(self, student_id):
+        return self.students.contains(student_id)
+
+    def get_all_students(self, other_course):
+        return self.students.union(other_course.students)
 
     def get_common_students(self, other_course):
         return self.students.intersection(other_course.students)
@@ -33,19 +201,42 @@ class CourseEnrollmentExtended:
     def get_students_only_in_course_b(self, other_course):
         return other_course.students.difference(self.students)
 
-    def get_all_students(self, other_course):
-        return self.students.union(other_course.students)
+    def add_course(self, course):
+        self.courses.add(course)
 
-    def write_roster(self, filename):
-        with open(filename, 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=["id", "name"])
-            writer.writeheader()
-            for student in self.students:
-                writer.writerow(student)
+    def remove_course(self, course):
+        self.courses.remove(course)
 
-    def read_roster(self, filename=None, file_obj=None):
-        source = file_obj if file_obj else open(filename, 'r')
-        with source:
-            reader = csv.DictReader(source)
-            for row in reader:
-                self.add_student({"id": row["id"], "name": row["name"]})
+    def get_all_courses(self):
+        return self.courses.to_list()
+
+    def get_courses_for_student(self, student):
+        return self.courses.intersection(student.courses)
+
+
+    def __str__(self):
+        return f"Students: {self.students}\nCourses: {self.courses}"
+
+
+if __name__ == "__main__":
+    course_a = CourseEnrollment()
+    course_b = CourseEnrollment()
+
+    students_a = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
+    students_b = [{"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
+
+    for student in students_a:
+        course_a.add_student(student)
+    for student in students_b:
+        course_b.add_student(student)
+
+    test_output = {
+        "Students in both courses": course_a.get_common_students(course_b).to_list(),
+        "Only in Course A": course_a.get_students_only_in_course_a(course_b).to_list(),
+        "Only in Course B": course_a.get_students_only_in_course_b(course_b).to_list(),
+        "All students across both courses": course_a.get_all_students(course_b).to_list()
+    }
+
+    for key, value in test_output.items():
+        print()
+        print(f"{key}: {value}")
