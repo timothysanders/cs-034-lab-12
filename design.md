@@ -8,45 +8,43 @@
 
 🔷 BSTNode Class
 
-Fields:          element, key
-
-Behaviors:       get_successor()
+Fields:         
 
 
+                element             key
 
+Behaviors:  
+               
+                get_successor()
 
 🔷 Set Class
-Class: 
-Set
-Fields:
-storage_root
-get_key
-Behaviors:
-add()
-remove()
-_min_value_node()
-__iter__()
-_in_order_with_elements()
-contains()
-union()
-intersection()
-difference()
-to_list()
 
+Fields:          
+
+
+                storage_root             get_key
+
+Behaviors:  
+               
+                add()             remove()            __iter__()
+                _in_order_with_elements()             contains()
+                union()           intersection()                  difference()
+                to_list()
 
 
 🔷 EnrollmentManager Class
-Class: 
-EnrollmentManager
+
 Fields:
-course_a
-course_b
+
+
+                course_a                course_b
+
 Behaviors:
-load_student_roster()
-students_in_both_courses()
-students_only_in_course_a()
-students_only_in_course_b()
-all_students()
+
+
+                load_student_roster()            students_in_both_courses()
+                students_only_in_course_a()      students_only_in_course_b()
+                all_students()
 
 
 
