@@ -22,12 +22,16 @@ Your team will build a Course Enrollment Manager that uses your Set implementati
     - All students across both courses
 - Provide a simple CLI or script that reads in two CSVs and prints the above.
 ## 3. Design
-### Deliverables
+### Requirement
 - Design Document (PDF or Markdown) including:
   - Class diagram (UML) or CRC cards for your `Set` class and the `EnrollmentManager` class 
   - Pseudocode for each `Set` operation
   - Data-flow sketch showing how CSV input flows through your manager into sets and outputs
 Submit as `design.pdf` (or `design.md`).
+
+### Implement Set class with Standard BST 
+In this lab, our primary focus is demonstrating set operations—union, intersection, difference—through a custom implementation of a Set class for a Course Enrollment Manager. While hash-table-based Sets offer excellent average O(1) performance, in realistic systems, their performance can potentially degrade due to hash collision. Since our goal is not to achieve the fastest set operations, we will implement our Set class using a binary search tree (BST) instead of a hash table. This approach ensures reasonably efficient operations with O(log N) time complexity and provides the benefit of being able to iterate over students in sorted order, such as by ID. To keep the BST implementation straightforward and as simple as possible—without adding balancing logic like that found in Treaps, AVL trees, or Red-Black trees—we will use a standard, unbalanced BST. This choice avoids unnecessary complexity for small to medium-sized datasets, which is suitable for our demo purposes.
+
 ### Design Rubric (25 points)
 | Criterion                          | Excellent (5)                                           | Good (4)                 | Fair (3)                               | Poor (≤2)                              |
 |------------------------------------|---------------------------------------------------------|--------------------------|----------------------------------------|----------------------------------------|
