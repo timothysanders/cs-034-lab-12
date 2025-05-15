@@ -5,13 +5,8 @@
 #Course: Spr25_CS_034 CRN 39575
 
 🧩 Part 1: UML/CRC
-| Class                         | BSTNode                                           |
-|------------------------------------|---------------------------------------------------------|--------------------------|----------------------------------------|----------------------------------------|
-| Fields       | All classes, methods, and attributes are clearly shown  | Minor omissions          | Missing one class or key method        | Major omissions or incorrect structure |
-| Behaviors         | Detailed, easy-to-follow pseudocode for every op        | Mostly clear, minor gaps | Some operations are missing or unclear | Little or no pseudocode provided       |
-| Data-flow sketch (5 pt)            | Clearly shows all major data movements                  | Mostly clear             | Missing one or two data flows          | Absent or very confusing sketch        |
-| Rationale & discussion (5 pt)      | Explains trade-offs (e.g., underlying structure choice) | Some rationale           | Rationale is shallow or incomplete     | No rationale                           |
-| Organization & presentation (5 pt) | Professional formatting, error-free                     | A few formatting issues  | Some typos/structure problems          | Hard to read, disorganized             |
+| Class                         | BSTNode                                  |
+       |
 
 
 🔷 BSTNode Class
