@@ -5,7 +5,7 @@
 #Course: Spr25_CS_034 CRN 39575
 
 🧩 Part 1: UML/CRC
-| Class                         | Excellent (5)                                           | Good (4)                 | Fair (3)                               | Poor (≤2)                              |
+| Class                         | BSTNode                                           |
 |------------------------------------|---------------------------------------------------------|--------------------------|----------------------------------------|----------------------------------------|
 | Fields       | All classes, methods, and attributes are clearly shown  | Minor omissions          | Missing one class or key method        | Major omissions or incorrect structure |
 | Behaviors         | Detailed, easy-to-follow pseudocode for every op        | Mostly clear, minor gaps | Some operations are missing or unclear | Little or no pseudocode provided       |
