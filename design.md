@@ -5,9 +5,6 @@
 #Course: Spr25_CS_034 CRN 39575
 
 🧩 Part 1: UML/CRC
-| Class                         | BSTNode                                  |
-       |
-
 
 🔷 BSTNode Class
 
