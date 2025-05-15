@@ -4,99 +4,52 @@
 
 #Course: Spr25_CS_034 CRN 39575
 
-🧩 Part 1: UML/CRC
-
-🔷 BSTNode Class
-
-Fields:         
-
-
-                element             key
-
-Behaviors:  
-               
-                get_successor()
-
-🔷 Set Class
-
-Fields:          
-
-
-                storage_root             get_key
-
-Behaviors:  
-               
-                add()                       remove()            __iter__()
-                _in_order_with_elements()                       contains()
-                union()                     intersection()      difference()
-                to_list()
-
-
-🔷 EnrollmentManager Class
-
-Fields:
-
-
-                course_a                course_b
-
-Behaviors:
-
-
-                load_student_roster()            students_in_both_courses()
-                students_only_in_course_a()      students_only_in_course_b()
-                all_students()
-
-
-
-
-
-
-
-
+Part 1: UML/CRC
 
 ```mermaid
 classDiagram
     class BSTNode {
-        -element
         -key
-        -parent = None
-        -left
-        -right
+        -element
+        -parent: BSTNode = None
+        -left: BSTNode = None
+        -right: BSTNode = None
+        +__init__(element, key, parent=None)
+        +__str__()
         +get_successor()
+        +get_predecessor()
     }
     
-    class BSTIterator {
-        -root
-        +__next__()
-        +next()
-    }
-    
-    class Set {
-        -storage_root
-        -get_key
-        +add()
-        +remove()
-        +min_value_node()
+    class BSTSet {
+        -storage_root: BSTNode
+        -get_key: function
+        +__init__(get_key_function=None)
         +__iter__()
+        +_in_order_with_elements(node)
+        +add(new_element)
+        +contains(new_element)
+        +remove(element)
+        +union(other_set)
+        +intersection(other_set)
+        +difference(other_set)
         +to_list()
-        +contains()
-        +union()
-        +intersection()
-        +difference()
     }
     
-    class EnrollmentManager {
-        -course_a
-        -course_b
-        +load_student_roster()
-        +students_in_both_courses()
-        +students_only_in_course_a()
-        +students_only_in_course_b()
-        +all_students()
+    class CourseEnrollmentExtended {
+        -students: BSTSet
+        +__init__()
+        +add_student(student)
+        +remove_student(student)
+        +find_student(student)
+        +get_common_students(other_course)
+        +get_students_only_in_course_a(other_course)
+        +get_students_only_in_course_b(other_course)
+        +get_all_students(other_course)
+        +write_roster(filename)
+        +read_roster(filename, file_obj)
     }
     
-    Set *-- BSTNode : contains
-    BSTIterator ..> BSTNode : uses
-    Set --> BSTIterator : creates
-    EnrollmentManager --> Set : uses
+    BSTNode --> BSTNode : parent, left, right
+    BSTSet o-- BSTNode : storage_root
+    CourseEnrollmentExtended --> BSTSet : students
 ```
