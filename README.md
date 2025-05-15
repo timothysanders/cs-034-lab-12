@@ -21,6 +21,21 @@ Your team will build a Course Enrollment Manager that uses your Set implementati
     - Students are only in course B
     - All students across both courses
 - Provide a simple CLI or script that reads in two CSVs and prints the above.
+  
+  - Course Roster Management (Write/Read) implemented in the class CourseEnrollment
+  ```
+    def write_roster(self, filename):
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for student in self.students:
+                writer.writerow(['Student ID', 'Student Name', 'Courses'])
+
+    def read_roster(self, filename):
+        with open(filename, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                student_id, student_name, courses = row
+  ```
 ## 3. Design
 ### Requirement
 - Design Document (PDF or Markdown) including:
