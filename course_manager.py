@@ -8,6 +8,8 @@
 import csv
 import random
 
+
+'''
 class BSTNode:
     def __init__(self, element, key, parent=None):
         self.key = key
@@ -52,7 +54,7 @@ class BSTNode:
             return current.parent
 
 
-class BSTSet:
+class Set:
     def __init__(self, get_key_function=None):
         self.storage_root = None
         self.get_key = get_key_function if get_key_function else lambda el: el
@@ -155,9 +157,7 @@ class BSTSet:
             if not other_set.contains(element):
                 result.add(element)
         return result
-
-
-
+'''
 def get_student_id(student):
     return student['id']
 
