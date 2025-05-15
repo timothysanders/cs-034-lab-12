@@ -8,17 +8,10 @@
 🧩 Part 1: UML/CRC
 
 🔷 BSTNode Class
-Class: 
-BSTNode
-Fields:
-element
-key
-parent = None
-left
-right
-Behaviors:
-get_successor()
 
+Class:                     BSTNode
+Fields:          element            key
+Behaviors:       get_successor()
 
 
 
