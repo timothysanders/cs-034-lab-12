@@ -3,46 +3,7 @@
 #Date: 5/11/25
 
 #Course: Spr25_CS_034 CRN 39575
-
-
-
-# Revised Implement from Megan
-#-------------------------------
-import csv
-import random
-
-class BSTNode:
-    def __init__(self, element, key, parent=None):
-        self.element = element
-        self.key = key
-        self.parent = parent
-        self.left = None
-        self.right = None
-
-    def get_successor(self):
-        if self.right:
-            successor = self.right
-            while successor.left:
-                successor = successor.left
-            return successor
-        else:
-            current = self
-            parent = current.parent
-            while parent and current == parent.right:
-                current = parent
-                parent = current.parent
-            return parent
-
-    def replace_child(self, current_child, new_child):
-        if current_child is self.left:
-            self.left = new_child
-            if self.left:
-                self.left.parent = self
-        elif current_child is self.right:
-            self.right = new_child
-            if self.right:
-                self.right.parent = self
-
+#----------------------------------------------
 #class BSTIterator:
     #def __init__(self, root):
         # Start at the leftmost (minimum) node
@@ -64,117 +25,203 @@ class BSTNode:
         #return current
 
 
-class Set:
-    def __init__(self, get_student_record_key=None):
+
+# Revised Implement without class BSTIterator
+#-------------------------------
+import csv
+import random
+
+class BSTNode:
+    def __init__(self, element, key, parent=None):
+        self.key = key
+        self.element = element
+        self.parent = parent
+        self.left = None
+        self.right = None
+
+    def __str__(self):
+        return f"({self.key}, {self.element})"
+
+    def get_successor(self):
+        """
+        Returns the in-order successor of this node in the BST.
+        """
+        # If right child exists, successor is the leftmost node in right subtree
+        if self.right:
+            successor = self.right
+            while successor.left:
+                successor = successor.left
+            return successor
+
+        # If no right child, go up until we find a node that is a left child
+        # Otherwise traverse up the tree until a parent is encountered from the left
+        current = self
+        while current.parent and current == current.parent.right:
+            current = current.parent
+
+        # Either we found a parent for which current is a left child, or we
+        # reached root (no successor)
+        return current.parent
+
+
+    def get_predecessor(self):
+        """
+        Returns the in-order predecessor of this node in the BST.
+        """
+        # Case 1: If left child exists, go down to rightmost node in left subtree
+        if self.left:
+            predecessor = self.left
+            while predecessor.right:
+                predecessor = predecessor.right
+            return predecessor
+        
+        # Case 2: If no left child, go up to the first parent for which current node
+        # is its right child, that is, up the tree unitl a parent is encountered from
+        # the right
+        current = self
+        while current.parent and current == current.parent.left:
+            current = current.parent
+
+        return current.parent  # Could be None if this is the minimum node
+
+
+
+class BSTSet:
+    def __init__(self, get_key_function=None):
         self.storage_root = None
-        self.get_key = get_student_record_key( if get_student_record_key else lambda el: el
+        self.get_key = get_key_function if get_key_function else lambda el: el
+
+
+    def __iter__(self):
+        yield from self._in_order_with_elements(self.storage_root)
+
+    
+    def _in_order_with_elements(self, node):
+        if node:
+            yield from self._in_order_with_elements(node.left)
+            yield node.element
+            yield from self._in_order_with_elements(node.right)
+
 
     def add(self, new_element):
-        new_key = self.get_key(new_element)
+        new_element_key = self.get_key(new_element)
 
-        def insert(node, element, key):
+        def _insert(node, new_element, new_element_key):
             if not node:
-                return BSTNode(element, key)
-            if key < node.key:
-                node.left = insert(node.left, element, key)
-                if node.left:
-                    node.left.parent = node
-            elif key > node.key:
-                node.right = insert(node.right, element, key)
-                if node.right:
-                    node.right.parent = node
+                return BSTNode(new_element, new_element_key)
+            if new_element_key < node.key:
+                node.left = _insert(node.left, new_element, new_element_key)
+            elif new_element_key > node.key:
+                node.right = _insert(node.right, new_element, new_element_key)
+
             return node
 
-        self.storage_root = insert(self.storage_root, new_element, new_key)
+        self.storage_root = _insert(self.storage_root, new_element, new_element_key)
 
-    def contains(self, element):
-        key = self.get_key(element)
 
-        def search(node, key):
+    def contains(self, new_element):
+        new_element_key = self.get_key(new_element)
+
+        def _search(node, new_element_key):
             if not node:
                 return False
-            if key == node.key:
+            if new_element_key == node.key:
                 return True
-            elif key < node.key:
-                return search(node.left, key)
+            elif new_element_key < node.key:
+                return _search(node.left, new_element_key)
             else:
-                return search(node.right, key)
+                return _search(node.right, new_element_key)
 
-        return search(self.storage_root, key)
+        return _search(self.storage_root, new_element_key)
+
 
     def remove(self, element):
-        key = self.get_key(element)
+        element_key = self.get_key(element)
 
-        def delete(node, key):
+        def _delete(node, element_key):
             if not node:
-                return None
-            if key < node.key:
-                node.left = delete(node.left, key)
-            elif key > node.key:
-                node.right = delete(node.right, key)
+                print("Empty Set")
+                return None               
+            if element_key < node.key:
+                node.left = _delete(node.left, element_key)
+            elif element_key > node.key:
+                node.right = _delete(node.right, element_key)
             else:
                 if not node.left:
                     return node.right
-                if not node.right:
+                elif not node.right:
                     return node.left
-                successor = self._min_value_node(node.right)
+                successor = node.get_successor()
                 node.key = successor.key
                 node.element = successor.element
-                node.right = delete(node.right, successor.key)
+                node.right = _delete(node.right, successor.key)
             return node
 
-        self.storage_root = delete(self.storage_root, key)
+        self.storage_root = _delete(self.storage_root, element_key)
 
-    def _min_value_node(self, node):
-        while node.left:
-            node = node.left
-        return node
 
-    def union(self, other):
+    def union(self, other_set):
         result = BSTSet(self.get_key)
-        for el in self:
-            result.add(el)
-        for el in other:
-            result.add(el)
+        for element in self:
+            result.add(element)
+        for element in other_set:
+            result.add(element)
         return result
 
-    def intersection(self, other):
+
+    def intersection(self, other_set):
         result = BSTSet(self.get_key)
-        for el in self:
-            if other.contains(el):
-                result.add(el)
+        for element in self:
+            if other_set.contains(element):
+                result.add(element)
         return result
 
-    def difference(self, other):
+
+    def difference(self, other_set):
         result = BSTSet(self.get_key)
-        for el in self:
-            if not other.contains(el):
-                result.add(el)
+        for element in self:
+            if not other_set.contains(element):
+                result.add(element)
         return result
-
-    #def __iter__(self):
-        #return BSTIterator(self.storage_root)
-
-    # Prefer this implementation other than the one applying BSTIterator
-    
-    def iter(self):
-        yield from self._in_order(self.storage_root)
-
-    def _in_order(self, node):
-        if node:
-            yield from self._in_order(node.left)
-            yield node.key
-            yield from self._in_order(node.right)
 
     def to_list(self):
-        return list(iter(self))
+        return [node.element for node in self] 
 
 
+def get_id_key(dictionary):
+    return dictionary["id"]
 
-def get_student_id(student):
-    return student
 
+if __name__ == "__main__":
+    a_students = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
+    b_students = [{"id": 1002,  "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
 
+    course_A = BSTSet(get_id_key)
+    course_B = BSTSet(get_id_key)
+
+    for student in a_students:
+        course_A.add(student)
+    for student in b_students:
+        course_B.add(student)
+
+    demo_output = {
+        "Course A contains 'Bob'": course_A.contains({"id": 1002}),
+        "Course B contains 'Charlie'": course_B.contains({"id": 1003}),
+        "Course A before removing 'Charlie'": list(course_A),
+    }
+
+    course_A.remove(a_students[2])
+
+    demo_output.update({
+        "Course A after removing 'Charlie'": list(course_A),
+        "Union of A and B": list(course_A.union(course_B)),
+        "Intersection of A and B": list(course_A.intersection(course_B)),
+        "Difference A - B": list(course_A.difference(course_B)),
+        "Difference B - A": list(course_B.difference(course_A)),
+    })
+
+    for key, value in demo_output.items():
+        print(f"{key}: {value}")
 
 #=======================================================================================================================================
 
