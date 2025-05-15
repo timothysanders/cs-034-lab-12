@@ -37,6 +37,19 @@ Your team will build a Course Enrollment Manager that uses your Set implementati
                 student_id, student_name, courses = row
   ```
 ## 3. Design
+
+### Architecture for Course Enrollment Manage System
+- class BSTNode, Set (implemented with a standard BST), CourseEnrollment
+
+### Data Flow
+- Create two instances of CourseEnrollment: course_a, course_b
+- Get students’ information from the given CSV files by calling the method read_roster() in class CourseEnrollment and store them in lists students_a, and students_b
+- By calling the method add_student() in class CourseEnrollment to enroll students for course_a and course_b, respectively
+- By calling the methods get_common_students(), get_students_only_in_course_a(), get_students_only_course_b(), get_all_students() defined in the class CourseEnrollment to operate common set-like behaviors defined in the class Set, including add(), difference(), intersection()
+- By calling the method find_student() defined in the class CourseEnrollment to operate set-like membership testing contains(), a method defined in the class Set
+
+### Test Cases
+
 ### Requirement
 - Design Document (PDF or Markdown) including:
   - Class diagram (UML) or CRC cards for your `Set` class and the `EnrollmentManager` class 
