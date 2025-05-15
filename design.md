@@ -8,8 +8,7 @@
 
 🔷 BSTNode Class
 
-Fields:          element
-                 key
+Fields:          element, key
 
 Behaviors:       get_successor()
 
