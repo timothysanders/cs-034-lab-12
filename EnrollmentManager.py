@@ -267,9 +267,9 @@ if __name__ == "__main__":
     course_a.write_roster(roster_filename_a)
     course_b.write_roster(roster_filename_b)
 
-    # Create new CourseEnrollment objects to read from the rosters
-    course_a_from_roster = CourseEnrollment()
-    course_b_from_roster = CourseEnrollment()
+    # Create new EnrollmentManager objects to read from the rosters
+    course_a_from_roster = EnrollmentManager()
+    course_b_from_roster = EnrollmentManager()
 
     print("Reading rosters from files...")
     course_a_from_roster.read_roster(roster_filename_a)
