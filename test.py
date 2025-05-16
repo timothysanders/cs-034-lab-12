@@ -4,13 +4,13 @@
 
 #Course: Spr25_CS_034 CRN 39575
 from Set import BSTNode
-from Set import Set
-from course_manager import CourseEnrollment
-from course_manager import get_student_id
+from Set import BSTSet
+from EnrollmentManager import EnrollmentManager
+from EnrollmentManager import get_student_id
 
 if __name__ == "__main__":
-    course_a = CourseEnrollment()
-    course_b = CourseEnrollment()
+    course_a = EnrollmentManager()
+    course_b = EnrollmentManager()
 
     students_a = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
     students_b = [{"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
