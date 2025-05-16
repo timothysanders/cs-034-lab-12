@@ -163,7 +163,7 @@ def get_student_id(student):
     return student['id']
 
 
-class CourseEnrollment:
+class EnrollmentManager:
     def __init__(self):
         self.students = BSTSet(get_student_id)
         self.courses = BSTSet()
@@ -237,8 +237,8 @@ class CourseEnrollment:
 
 
 if __name__ == "__main__":
-    course_a = CourseEnrollment()
-    course_b = CourseEnrollment()
+    course_a = EnrollmentManager()
+    course_b = EnrollmentManager()
 
     students_a = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
     students_b = [{"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
@@ -258,3 +258,29 @@ if __name__ == "__main__":
     for key, value in test_output.items():
         print()
         print(f"{key}: {value}")
+
+    # Roster Management Demonstration
+    roster_filename_a = "course_a_roster.csv"
+    roster_filename_b = "course_b_roster.csv"
+
+    print("Writing rosters to files...")
+    course_a.write_roster(roster_filename_a)
+    course_b.write_roster(roster_filename_b)
+
+    # Create new CourseEnrollment objects to read from the rosters
+    course_a_from_roster = CourseEnrollment()
+    course_b_from_roster = CourseEnrollment()
+
+    print("Reading rosters from files...")
+    course_a_from_roster.read_roster(roster_filename_a)
+    course_b_from_roster.read_roster(roster_filename_b)
+
+    # Verify that the rosters were read correctly
+    print("\nStudents in course_a_from_roster:")
+    for student in course_a_from_roster.students:
+        print(student)
+
+    print("\nStudents in course_b_from_roster:")
+    for student in course_b_from_roster.students:
+        print(student)
+
