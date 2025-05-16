@@ -1,7 +1,7 @@
 # PCC CS-034: Lab 12
 Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
 ## Group Members and Roles
-- Michael Jung:
+- Michael Jung: Developed pseudocode for the set class operations, developed the initial implementation of the set class and the CRM for the EnrollmentManager class, and debugged the program.
 - Megan Ng:
 - Tim Sanders:
 ## 1. Objective
