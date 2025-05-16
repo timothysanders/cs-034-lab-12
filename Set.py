@@ -86,7 +86,7 @@ class BSTNode:
 
 
 
-class Set:
+class BSTSet:
     def __init__(self, get_key_function=None):
         self.storage_root = None
         self.get_key = get_key_function if get_key_function else lambda el: el
