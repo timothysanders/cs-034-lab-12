@@ -1,4 +1,8 @@
 # PCC CS-034: Lab 12
+## Group Members and Roles
+- Michael Jung:
+- Megan Ng:
+- Tim Sanders:
 ## 1. Objective
 By the end of this lab, you will:
 - Deepen your understanding of the Set abstract data type (ADT)
