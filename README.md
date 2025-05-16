@@ -4,8 +4,9 @@
 Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
 
 - Michael Jung
-  - Initiate CRM for the EnrollmentManager class
+  - Initiate CRM for class EnrollmentManager
   - Initiate and develop the pseudocode for both class Set and class EnrollmentManager
+  - Initiate the concrete implementation of class Set
   - Review and edit the design documentation
   - Add docstrings comments
   - Review and debug the concrete implementatioin
@@ -13,7 +14,7 @@ Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan
 - Megan Ng:
   - Participate in the development and the reconstruction of UML/CRC & DATA FLOW
   - Rationalize the choice of underlying data structure (BST-based Set)
-  - Participate in the development of pseudocode for both class Set and class C
+  - Participate in the development of pseudocode for both class Set and class EnrollmentManager
   - Edit the presentation of design document
   - Initiate and participate the concrete implementations for both class Set and EnrollmentManager
   - Review and debug the concrete implementation
