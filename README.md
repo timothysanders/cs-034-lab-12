@@ -38,7 +38,7 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
 
 
 ### Architecture for Course Enrollment Manage System
-- class BSTNode, Set (implemented with a standard BST), CourseEnrollment
+- class BSTNode, Set (implemented with a standard BST), EnrollmentManager
 
 ### Data Flow
 - Create two instances of `EnrollmentManager`: `course_a`, `course_b`
