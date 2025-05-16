@@ -170,21 +170,34 @@ class CourseEnrollment:
 
 
     def write_roster(self, filename):
-        with open(filename, 'w', newline='') as csvfile:
-            fieldnames = ['id', 'name', 'courses']  # Define the header
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames) 
-            writer.writeheader()  # Write the header row
-            for student in self.students:  
-                # Assuming 'student' is a dictionary with 'id', 'name', 'courses'
-                writer.writerow(student)  
+        try:
+            with open(filename, 'w', newline='') as csvfile:
+                fieldnames = ['id', 'name', 'courses']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for student in self.students:
+                    writer.writerow(student)
+        except (IOError, OSError) as e:
+            print(f"Error writing roster to file: {e}")
+        except KeyError as e:
+            print(f"Error: Student data missing required key '{e}'")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
     def read_roster(self, filename):
-        with open(filename, 'r') as csvfile:
-            reader = csv.DictReader(csvfile)  # Use DictReader
-            for row in reader:
-                # Add student to the CourseEnrollment
-                self.add_student(row)
+        try:
+            with open(filename, 'r') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    self.add_student(row)
+        except (IOError, OSError) as e:
+            print(f"Error reading roster from file: {e}")
+        except KeyError as e:
+            print(f"Error: CSV data missing required column '{e}'")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
+    
     def add_student(self, student):
         self.students.add(student)
 
