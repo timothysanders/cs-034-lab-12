@@ -93,7 +93,7 @@ Requirement
 Submit as `design.pdf` (or `design.md`).
 
 
-## 3. Deliverables
+## 4. Deliverables Package
 
 - Source code in a GitHub repo or zip, containing:
   - `Set.py` with your Set implementation
