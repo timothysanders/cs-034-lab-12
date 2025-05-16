@@ -1,4 +1,5 @@
 # PCC CS-034: Lab 12
+#Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
 ## Group Members and Roles
 - Michael Jung:
 - Megan Ng:
