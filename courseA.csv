@@ -5,8 +5,8 @@
 #Course: Spr25_CS_034 CRN 39575
 
 
-id,name
-S1001,Alice
-S1002,Bob
-S1003,Charlie
-S1004,Diana
+id          name
+S1001       Alice
+S1002       Bob
+S1003       Charlie
+S1004       Diana
