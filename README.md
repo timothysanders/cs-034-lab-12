@@ -26,29 +26,25 @@ Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan
   - Implement test and integrate the entire script
 
 ## 1. Objective
-By the end of this lab, you will:
-- Deepen your understanding of the Set abstract data type (ADT)
-- Design and implement a concrete Set class (using your choice of underlying structure)
-- Apply that Set to solve a small real-world problem
-## 2. Project Description
-Your team will build a Course Enrollment Manager that uses your Set implementation to track which students are enrolled in which courses, with no duplicate enrollments. You must:
-- Implement a `Set` class supporting:
-  - `add(element)`
-  - `remove(element)`
-  - `contains(element)`
-  - `union(otherSet)`
-  - `intersection(otherSet)`
-  - `difference(otherSet)`
-- Use your `Set` to manage enrollment for two courses:
-  - Load each course’s roster from a CSV file of Student IDs 
-  - Compute and display:
-    - Students in both courses
-    - Students are only in course A
-    - Students are only in course B
-    - All students across both courses
-- Provide a simple CLI or script that reads in two CSVs and prints the above.
+By the end of this lab, we have:
+- Deepened our understanding of the Set abstract data type (ADT)
+- Designed and implemented a concrete BST-based Set class
+- Applied our BST-based Set to simulate the real-world Course Enrollment Manage System
   
-  - Course Roster Management (Write/Read) implemented in the class CourseEnrollment
+## 2. Project Description
+Our team has built a Course Enrollment Manager that uses our BST-based Set class to:
+- Enroll and Disenroll students for two different courses: course A, course B
+    - `add(element)`
+    - `remove(element)`
+- Track students enrolled for either course A or course B
+    - `contains(element)`
+- Track students only in course A or course B
+  - `difference(otherSet)`
+- Track students in both courses 
+    - `intersection(otherSet)`
+- Track all studnets across both course
+   - `union(otherSet)`
+- Manage Enrollment Roster to read from a CSV file
   ```
     def write_roster(self, filename):
         with open(filename, 'w', newline='') as csvfile:
@@ -58,7 +54,9 @@ Your team will build a Course Enrollment Manager that uses your Set implementati
             for student in self.students:  
                 # Assuming 'student' is a dictionary with 'id', 'name', 'courses'
                 writer.writerow(student)  
-
+    ```
+- Manage Enrollment Roster to write into a CSV file
+  ```
     def read_roster(self, filename):
         with open(filename, 'r') as csvfile:
             reader = csv.DictReader(csvfile)  # Use DictReader
@@ -66,6 +64,7 @@ Your team will build a Course Enrollment Manager that uses your Set implementati
                 # Add student to the CourseEnrollment
                 self.add_student(row)
   ```
+
 ## 3. Design
 
 ### Architecture for Course Enrollment Manage System
