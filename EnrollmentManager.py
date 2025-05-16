@@ -8,7 +8,7 @@
 import csv
 import random
 from BSTNode import BSTNode
-from Set import Set
+from Set import BSTSet
 
 '''
 class BSTNode:
