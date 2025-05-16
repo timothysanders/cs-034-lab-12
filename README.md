@@ -1,9 +1,29 @@
 # PCC CS-034: Lab 12
 Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan Ng (ID: 00756276)
+
 ## Group Members and Roles
-- Michael Jung: Developed pseudocode for the set class operations, developed the initial implementation of the set class and the CRM for the EnrollmentManager class, and debugged the program.
+- Michael Jung
+  - Initiate CRM for the EnrollmentManager class
+  - Initiate and Development of pseudocode for both class Set and class EnrollmentManager
+  - Review and edit the design documentation
+  - Add docstrings comments
+  - Review and debug the concrete implementatioin
+    
 - Megan Ng:
+  - Participate in the development and the reconstruction of UML/CRC & DATA FLOW
+  - Rationalize the choice of underlying data structure (BST-based Set)
+  - Participate in the development of pseudocode for both class Set and class C
+  - Edit the presentation of design document
+  - Initiate and participate the concrete implementations for both class Set and EnrollmentManager
+  - Review and debug the concrete implementation
+
 - Tim Sanders:
+  - Participate in the development and the reconstruction of UML/CRC & DATA FLOW
+  - Provide graphical diagram for UML/CRC & DATA FLOW
+  - Review and edit the design documentation
+  - Review the concrete implementation
+  - Implement test and integrate the entire script
+
 ## 1. Objective
 By the end of this lab, you will:
 - Deepen your understanding of the Set abstract data type (ADT)
