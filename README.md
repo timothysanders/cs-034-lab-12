@@ -22,7 +22,7 @@ Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan
   - Participate in the development and the reconstruction of UML/CRC & DATA FLOW
   - Provide graphical diagram for UML/CRC & DATA FLOW
   - Review and edit the design documentation
-  - Review the concrete implementation
+  - Review and debug the concrete implementation
   - Implement test and integrate the entire script
 
 ## 1. Objective
