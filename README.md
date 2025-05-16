@@ -31,8 +31,24 @@ By the end of this lab, we have:
 - Designed and implemented a concrete BST-based Set class
 - Applied our BST-based Set to simulate the real-world Course Enrollment Manage System
   
-## 2. Project Description
-Our team has built a Course Enrollment Manager that uses our BST-based Set class to:
+## 2. Project Design & Description
+
+### Implement Set class with Standard BST 
+In this lab, our primary focus is demonstrating set operations—union, intersection, difference—through a custom implementation of a Set class for a Course Enrollment Manager. While hash-table-based Sets offer excellent average O(1) performance, in realistic systems, their performance can potentially degrade due to hash collision. Since our goal is not to achieve the fastest set operations, we will implement our Set class using a binary search tree (BST) instead of a hash table. This approach ensures reasonably efficient operations with O(log N) time complexity and provides the benefit of being able to iterate over students in sorted order, such as by ID. To keep the BST implementation straightforward and as simple as possible—without adding balancing logic like that found in Treaps, AVL trees, or Red-Black trees—we will use a standard, unbalanced BST. This choice avoids unnecessary complexity for small to medium-sized datasets, which is suitable for our demo purposes.
+
+
+### Architecture for Course Enrollment Manage System
+- class BSTNode, Set (implemented with a standard BST), CourseEnrollment
+
+### Data Flow
+- Create two instances of `EnrollmentManager`: `course_a`, `course_b`
+- Get students’ information from the given CSV files by calling the method `read_roster()` in class `EnrollmentManager` and store them in lists `students_a`, and `students_b`
+- By calling the method `add_student()` in class `EnrollmentManager` to enroll students for course_a and course_b, respectively
+- By calling the methods `get_common_students()`, `get_students_only_in_course_a()`, `get_students_only_course_b()`, `get_all_students()` defined in the class `EnrollmentManager` to operate common set-like behaviors defined in the class Set, including `add()`, `difference()`, `intersection()`
+- By calling the method `find_student()` defined in the class `EnrollmentManager` to operate set-like membership testing `contains()`, a method defined in the class Set
+
+
+### Our team has built a Course Enrollment Manager that uses our BST-based Set class to:
 - Enroll and Disenroll students for two different courses: course A, course B
     - `add(element)`
     - `remove(element)`
@@ -65,29 +81,13 @@ Our team has built a Course Enrollment Manager that uses our BST-based Set class
                 self.add_student(row)
   ```
 
-## 3. Design
-
-### Architecture for Course Enrollment Manage System
-- class BSTNode, Set (implemented with a standard BST), CourseEnrollment
-
-### Data Flow
-- Create two instances of CourseEnrollment: `course_a`, `course_b`
-- Get students’ information from the given CSV files by calling the method `read_roster()` in class CourseEnrollment and store them in lists `students_a`, and `students_b`
-- By calling the method `add_student()` in class CourseEnrollment to enroll students for course_a and course_b, respectively
-- By calling the methods `get_common_students()`, `get_students_only_in_course_a()`, `get_students_only_course_b()`, `get_all_students()` defined in the class CourseEnrollment to operate common set-like behaviors defined in the class Set, including `add()`, `difference()`, `intersection()`
-- By calling the method `find_student()` defined in the class CourseEnrollment to operate set-like membership testing `contains()`, a method defined in the class Set
-
-### Test Cases
-
+## 3. Test Cases
 ### Requirement
 - Design Document (PDF or Markdown) including:
   - Class diagram (UML) or CRC cards for your `Set` class and the `EnrollmentManager` class 
   - Pseudocode for each `Set` operation
   - Data-flow sketch showing how CSV input flows through your manager into sets and outputs
 Submit as `design.pdf` (or `design.md`).
-
-### Implement Set class with Standard BST 
-In this lab, our primary focus is demonstrating set operations—union, intersection, difference—through a custom implementation of a Set class for a Course Enrollment Manager. While hash-table-based Sets offer excellent average O(1) performance, in realistic systems, their performance can potentially degrade due to hash collision. Since our goal is not to achieve the fastest set operations, we will implement our Set class using a binary search tree (BST) instead of a hash table. This approach ensures reasonably efficient operations with O(log N) time complexity and provides the benefit of being able to iterate over students in sorted order, such as by ID. To keep the BST implementation straightforward and as simple as possible—without adding balancing logic like that found in Treaps, AVL trees, or Red-Black trees—we will use a standard, unbalanced BST. This choice avoids unnecessary complexity for small to medium-sized datasets, which is suitable for our demo purposes.
 
 
 ## 4. Implementation
