@@ -5,7 +5,7 @@ Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan
 
 - Michael Jung
   - Initiate CRM for the EnrollmentManager class
-  - Initiate and Development of pseudocode for both class Set and class EnrollmentManager
+  - Initiate and development of pseudocode for both class Set and class EnrollmentManager
   - Review and edit the design documentation
   - Add docstrings comments
   - Review and debug the concrete implementatioin
