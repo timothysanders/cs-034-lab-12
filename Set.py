@@ -4,30 +4,7 @@
 
 #Course: Spr25_CS_034 CRN 39575
 #----------------------------------------------
-#class BSTIterator:
-    #def __init__(self, root):
-        # Start at the leftmost (minimum) node
-        #self.node = self._min_node(root)
 
-    #def _min_node(self, node):
-        #while node and node.left:
-            #node = node.left
-        #return node
-
-    #def __iter__(self):
-        #return self
-
-    #def __next__(self):
-        #if not self.node:
-            #raise StopIteration()
-        #current = self.node.element
-        #self.node = self.node.get_successor()
-        #return current
-
-
-
-# Revised Implement without class BSTIterator
-#-------------------------------
 import csv
 import random
 
