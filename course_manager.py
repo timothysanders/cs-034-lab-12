@@ -7,7 +7,8 @@
 
 import csv
 import random
-
+from BSTNode import BSTNode
+from Set import Set
 
 '''
 class BSTNode:
@@ -170,15 +171,19 @@ class CourseEnrollment:
 
     def write_roster(self, filename):
         with open(filename, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            for student in self.students:
-                writer.writerow(['Student ID', 'Student Name', 'Courses'])
+            fieldnames = ['id', 'name', 'courses']  # Define the header
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames) 
+            writer.writeheader()  # Write the header row
+            for student in self.students:  
+                # Assuming 'student' is a dictionary with 'id', 'name', 'courses'
+                writer.writerow(student)  
 
     def read_roster(self, filename):
         with open(filename, 'r') as csvfile:
-            reader = csv.reader(csvfile)
+            reader = csv.DictReader(csvfile)  # Use DictReader
             for row in reader:
-                student_id, student_name, courses = row
+                # Add student to the CourseEnrollment
+                self.add_student(row)
 
     def add_student(self, student):
         self.students.add(student)
