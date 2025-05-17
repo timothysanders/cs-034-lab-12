@@ -51,20 +51,27 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
 ## 3. Project Implementation
 
 ### 1) Our team has built a Course Enrollment Manager `EnrollmentManager` that uses our BST-based `Set` class to:
+- In class EnrollmentManager, implement the following methods based on the methods defined in class Set:
+    - `add_student()` (using `add()` in Set)
+    - `remove_student()` (using `remove()` in Set)
+    -  `find_student()` (using 'contains()` in Set)
+    - `get_common_students()` (using `intersection()` in Set)
+    - `get_students_only_in_course_a` & `get_students_only_in_course_b` (both using `difference()` in Set)
+    - `get_all_students()` (using `union` in Set)
 
 - Instantiate two student sets: `students_a` for courseA, `students_b` for courseB
 
 - Enroll and Disenroll students for two different courses: courseA, courseB
-    - `students_a.add(element)` & `students_b.add(element)`
-    - `students_a.remove(element)` & `students_b.remove(element)`
+    - `students_a.add_student(element)` & `students_b.add_student(element)`
+    - `students_a.remove_student(element)` & `students_b.remove_student(element)`
 - Track students enrolled for either courseA or courseB
-    - `students_a.contains(element)` & `students_b.contains(element)`
+    - `students_a.find_student(element)` & `students_b.find_student(element)`
 - Track students only in courseA or courseB
-  - `difference(students_a, students_b)` & `difference(students_b, students_a)`
+  - `get_students_only_in_course_a(students_a, students_b)` & `get_students_only_in_course_b(students_b, students_a)`
 - Track students in both courses 
-    - `intersection(students_a, students_b)`
+    - `get_common_students(students_a, students_b)`
 - Track all studnets across both course
-   - `union(students_a, students_b)`
+   - `get_all_students(students_a, students_b)`
 - Manage Enrollment Roster to read from a CSV file
   ```
     def write_roster(self, filename):
