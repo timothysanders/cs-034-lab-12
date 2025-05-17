@@ -63,7 +63,7 @@ class BSTNode:
 
 
 
-class BSTSet:
+class Set:
     def __init__(self, get_key_function=None):
         self.storage_root = None
         self.get_key = get_key_function if get_key_function else lambda el: el
@@ -173,8 +173,8 @@ if __name__ == "__main__":
     a_students = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
     b_students = [{"id": 1002,  "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
 
-    course_A = BSTSet(get_id_key)
-    course_B = BSTSet(get_id_key)
+    course_A = Set(get_id_key)
+    course_B = Set(get_id_key)
 
     for student in a_students:
         course_A.add(student)
