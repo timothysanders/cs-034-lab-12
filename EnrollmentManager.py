@@ -60,6 +60,17 @@ class EnrollmentManager:
 
 
     def write_roster(self, filename):
+        """
+        Opens a csv file and writes in the roster including a student's name and id.
+        
+        Parameters
+        ----------
+        filename : str
+        
+        Returns
+        -------
+        None
+        """        
         try:
             with open(filename, 'w', newline='') as csvfile:
                 fieldnames = ['id', 'name']
@@ -75,6 +86,17 @@ class EnrollmentManager:
             print(f"An unexpected error occurred: {e}")
 
     def read_roster(self, filename):
+        """
+        Opens a csv file and reads in the roster of students.
+        
+        Parameters
+        ----------
+        filename : str
+        
+        Returns
+        -------
+        None
+        """             
         try:
             with open(filename, 'r') as csvfile:
                 reader = csv.DictReader(csvfile)
@@ -89,20 +111,88 @@ class EnrollmentManager:
     
     def add_student(self, student):
         self.students.add(student)
-
+        """
+        Adds a student to the Set of students.
+        
+        Parameters
+        ----------
+        student : key-value pair of id and name
+        
+        Returns
+        -------
+        None
+        """     
     def remove_student(self, student):
+        """
+        Removes a student from the Set of students.
+        
+        Parameters
+        ----------
+        student : key-value pair of id and name
+        
+        Returns
+        -------
+        None
+        """            
         self.students.remove(student)
 
     def find_student(self, student_id):
+        """
+        Finds a student from the Set of students.
+        
+        Parameters
+        ----------
+        student_id : key value in the dictionary which is an int
+        
+        Returns
+        -------
+        bool
+        """            
         return self.students.contains(student_id)
 
     def get_all_students(self, other_course):
+        """
+        Returns the union of two Sets of students in two different courses
+        (students that are in course a and course b combined).
+        
+        Parameters
+        ----------
+        other_course : Set
+        
+        Returns
+        -------
+        Set
+        """         
         return self.students.union(other_course.students)
 
     def get_common_students(self, other_course):
+        """
+        Returns the intersection of two Sets of students in two different courses
+        (students that are in both course a and course b).
+        
+        Parameters
+        ----------
+        other_course : Set
+        
+        Returns
+        -------
+        Set
+        """         
         return self.students.intersection(other_course.students)
 
     def get_students_only_in_one_course(self, other, primary_course='a'):
+        """
+        Returns the difference of two Sets of students in two different courses (Either students
+        only in course a or course b). 
+        
+        Parameters
+        ----------
+        other : Set
+        primary_course : Set
+        Returns
+        -------
+        Set
+        """          
         if primary_course == 'a':
             # Students in self.students but not in other.students
             return self.students.difference(other.students)
@@ -114,19 +204,66 @@ class EnrollmentManager:
             raise ValueError("primary_course must be 'a' or 'b'")
 
     def add_course(self, course):
+        """
+        Adds a course to the Set of courses.
+        
+        Parameters
+        ----------
+        course : Set
+        
+        Returns
+        -------
+        None
+        """          
         self.courses.add(course)
 
     def remove_course(self, course):
+        """
+        Removes a course from the Set of courses.
+        
+        Parameters
+        ----------
+        course : Set
+        
+        Returns
+        -------
+        None
+        """            
         self.courses.remove(course)
 
     def get_all_courses(self):
+        """
+        Returns all the courses from the Set of courses.
+        
+        Returns
+        -------
+        list
+        """             
         return self.courses.to_list()
 
     def get_courses_for_student(self, student):
+        """
+        Returns a Set containing the courses that a student is enrolled in
+        
+        Parameters
+        ----------
+        student : key-value pair of student id and name
+        
+        Returns
+        -------
+        Set
+        """            
         return self.courses.intersection(student.courses)
 
 
     def __str__(self):
+       """
+        Returns a string representation of the Set of students and Set of courses
+        
+        Returns
+        -------
+        str
+        """          
         return f"Students: {self.students}\nCourses: {self.courses}"
 
 
