@@ -1,5 +1,5 @@
-id       name
-S1003    Charlie
-S1004    Diana
-S1005    Eve
-S1006    Frank
+id,name
+S1003,Charlie
+S1004,Diana
+S1005,Eve
+S1006,Frank
