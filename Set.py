@@ -9,6 +9,24 @@ import csv
 import random
 
 class BSTNode:
+     """
+    BST nodes are used to implement our Set.
+
+    Attributes
+    ----------
+    key : by default the key is the element itself unless otherwise specified
+    element : string
+    parent : BSTNode
+    left : BSTNode
+    right : BSTNode
+
+    Methods
+    -------
+    get_successor()
+        Returns the in-order successor node of a given node (leftmost node in the right subtree).
+    get_predecessor()
+        Returns the in-order predecessor node of a given node (rightmode node in the left subtree).
+    """
     def __init__(self, element, key, parent=None):
         self.key = key
         self.element = element
@@ -64,6 +82,35 @@ class BSTNode:
 
 
 class Set:
+    """
+    The Set abstract data type is implented using BST Nodes.
+
+    Attributes
+    ----------
+    storage_root : BSTNode
+    get_key : function (by default the element itself is returned as the key)
+
+    Methods
+    -------
+    __iter__()
+        Returns the minimum node in the BST.
+    _in_order_with_elements()
+        Traverses the BST in-order (left, parent, right).
+    add(element)
+        Inserts an element to the Set using BST logic.
+    contains(element)
+         Searches the BST for an element. Returns True if the element exists in the set and False if it does not.
+    remove(element)
+        Removes an element from the Set using BST logic.
+    union(other_set)
+        Returns the union of the self set and other set.
+    intersection(other_set)
+        Returns the intersection of the self set and other set.
+    difference(other_set)
+        Returns the difference of the self set and other set.    
+    get_id_key(dictionary)
+        Return the ID of a student in the set as the key.
+    """
     def __init__(self, get_key_function=None):
         self.storage_root = None
         self.get_key = get_key_function if get_key_function else lambda el: el
