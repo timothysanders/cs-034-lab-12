@@ -312,7 +312,7 @@ class Set:
         return result
 
     def to_list(self):
-        return [node.element for node in self] 
+        return list(self)
 
 # define a concrete get_key_function() which can be used as arguement for Set constructor
 def get_id_key(dictionary):
