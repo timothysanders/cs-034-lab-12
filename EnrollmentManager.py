@@ -17,6 +17,43 @@ def get_student_id(student):
 
 
 class EnrollmentManager:
+    """
+    Enrolls students in courses using the Set class.
+
+    Attributes
+    ----------
+    students : Set
+    courses : Set
+
+    Methods
+    -------
+    write_roster(filename)
+        Opens a CSV file and writes the roster of students to the file.
+    read_roster(filename)
+        Opens a CSV file and reads in the roster of students from the file.
+    add_student(student)
+        Uses the add() method from the Set class to add a student to the set of students.
+    remove_student(student)
+        Uses the remove() method from the Set class to remove a student from the set of students.
+    find_student(student_id)
+        Uses the contains() method from the Set class to find a student from the set of students based on ID.
+    get_all_students(other_course)
+        Uses the union() method from the Set class to return the union of students from two courses.   
+    get_common_students(other_course)
+        Uses the intersection() method from the Set class to return the intersection of students from two courses.   
+    get_students_only_in_one_course(other, primary_course='a')
+        Uses the difference() method from the Set class to return students who are only in one course.   
+    add_course(course)
+        Adds a course to the set of courses.   
+    remove_course(course)
+        Removes a course from the set of courses. 
+    get_all_courses()
+        Returns
+    get_courses_for_student(student)
+        Returns the courses a student is enrolled in by finding the intersection between all courses and the student's courses.    
+    __str__()
+        Returns a string listing all the students and courses            
+    """
     def __init__(self):
         self.students = Set(get_student_id)
         self.courses = Set()
