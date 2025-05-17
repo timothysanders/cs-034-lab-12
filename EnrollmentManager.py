@@ -10,155 +10,8 @@ import random
 from BSTNode import BSTNode
 from Set import BSTSet
 
-'''
-class BSTNode:
-    def __init__(self, element, key, parent=None):
-        self.key = key
-        self.element = element
-        self.parent = parent
-        self.left = None
-        self.right = None
-
-    def __str__(self):
-        return f"({self.key}, {self.element})"
-
-    def get_successor(self):
-        """
-        Returns the in-order successor of this node in the BST.
-        """
-        # If right child exists, successor is the leftmost node in right subtree
-        if self.right:
-            successor = self.right
-            while successor.left:
-                successor = successor.left
-            return successor
-        else:
-            current = self
-            while current.parent and current == current.parent.right:
-                current = current.parent
-            return current.parent
-
-    def get_predecessor(self):
-        """
-        Returns the in-order predecessor of this node in the BST.
-        """
-        # Case 1: If left child exists, go down to rightmost node in left subtree
-        if self.left:
-            predecessor = self.left
-            while predecessor.right:
-                predecessor = predecessor.right
-            return predecessor
-        else:
-            current = self
-            while current.parent and current == current.parent.left:
-                current = current.parent
-            return current.parent
-
-
-class Set:
-    def __init__(self, get_key_function=None):
-        self.storage_root = None
-        self.get_key = get_key_function if get_key_function else lambda el: el
-
-
-    def __iter__(self):
-        yield from self._in_order_with_elements(self.storage_root)
-
-    
-    def _in_order_with_elements(self, node):
-        if node:
-            yield from self._in_order_with_elements(node.left)
-            yield node.element
-            yield from self._in_order_with_elements(node.right)
-
-
-    def to_list(self):
-        return list(iter(self))
-
-
-    def add(self, new_element):
-        new_element_key = self.get_key(new_element)
-
-        def _insert(node, element, key):
-            if not node:
-                return BSTNode(element, key)
-            if key < node.key:
-                node.left = _insert(node.left, element, key)
-                if node.left:
-                    node.left.parent = node
-            elif key > node.key:
-                node.right = _insert(node.right, element, key)
-                if node.right:
-                    node.right.parent = node
-            return node
-
-        self.storage_root = _insert(self.storage_root, new_element, new_element_key)
-
-    
-    def contains(self, element):
-        key = self.get_key(element)
-
-        def _search(node, key):
-            if not node:
-                return False
-            if key == node.key:
-                return True
-            elif key < node.key:
-                return _search(node.left, key)
-            else:
-                return _search(node.right, key)
-
-        return _search(self.storage_root, key)
-
-    
-    def remove(self, element):
-        key = self.get_key(element)
-
-        def _delete(node, key):
-            if not node:
-                return None
-            if key < node.key:
-                node.left = _delete(node.left, key)
-            elif key > node.key:
-                node.right = _delete(node.right, key)
-            else:
-                if not node.left:
-                    return node.right
-                elif not node.right:
-                    return node.left
-                successor = node.get_successor()
-                node.key = successor.key
-                node.element = successor.element
-                node.right = _delete(node.right, successor.key)
-            return node
-
-        self.storage_root = _delete(self.storage_root, key)
-
-    
-    def union(self, other_set):
-        result = BSTSet(self.get_key)
-        for element in self:
-            result.add(element)
-        for element in other_set:
-            result.add(element)
-        return result
-
-    
-    def intersection(self, other_set):
-        result = BSTSet(self.get_key)
-        for element in self:
-            if other_set.contains(element):
-                result.add(element)
-        return result
-
-
-    def difference(self, other_set):
-        result = BSTSet(self.get_key)
-        for element in self:
-            if not other_set.contains(element):
-                result.add(element)
-        return result
-'''
+# get_key_function for the intialize Set based on BST
+# =====================================================
 def get_student_id(student):
     return student['id']
 
@@ -196,7 +49,6 @@ class EnrollmentManager:
             print(f"Error: CSV data missing required column '{e}'")
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
-
     
     def add_student(self, student):
         self.students.add(student)
@@ -213,11 +65,16 @@ class EnrollmentManager:
     def get_common_students(self, other_course):
         return self.students.intersection(other_course.students)
 
-    def get_students_only_in_course_a(self, other_course):
-        return self.students.difference(other_course.students)
-
-    def get_students_only_in_course_b(self, other_course):
-        return other_course.students.difference(self.students)
+    def get_students_only_in_one_course(self, other, primary_course='a'):
+        if primary_course == 'a':
+            # Students in self.students but not in other.students
+            return self.students.difference(other.students)
+        elif primary_course == 'b':
+            # Students in other.students but not in self.students
+            return other.students.difference(self.students)
+        else:
+            # Handle invalid primary_course value, e.g., raise an error
+            raise ValueError("primary_course must be 'a' or 'b'")
 
     def add_course(self, course):
         self.courses.add(course)
