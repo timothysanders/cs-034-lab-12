@@ -193,10 +193,10 @@ class EnrollmentManager:
         -------
         Set
         """          
-        if primary_course == 'a':
+        if primary_course.lower() == 'a':
             # Students in self.students but not in other.students
             return self.students.difference(other.students)
-        elif primary_course == 'b':
+        elif primary_course.lower() == 'b':
             # Students in other.students but not in self.students
             return other.students.difference(self.students)
         else:
