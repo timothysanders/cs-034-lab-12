@@ -56,7 +56,7 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
     - `remove_student()` (using `remove()` in Set)
     -  `find_student()` (using 'contains()` in Set)
     - `get_common_students()` (using `intersection()` in Set)
-    - `get_students_only_in_course_a` & `get_students_only_in_course_b` (both using `difference()` in Set)
+    - `get_students_only_in_one_course(self, other, primary_course='a')` (both using `difference()` in Set)
     - `get_all_students()` (using `union()` in Set)
 
 - Instantiate two student sets: `students_a` for courseA, `students_b` for courseB
