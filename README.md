@@ -9,7 +9,7 @@ Group Members: Michael Jung (ID:10680322), Timothy Sanders (ID: 01002147), Megan
   - Initiate the concrete implementation of class Set
   - Review and edit the design documentation
   - Add docstrings comments
-  - Review and debug the concrete implementatioin
+  - Review and debug the concrete implementation
     
 - Megan Ng:
   - Participate in the development and the reconstruction of UML/CRC & DATA FLOW
@@ -54,7 +54,7 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
 - In class EnrollmentManager, implement the following methods based on the methods defined in class Set:
     - `add_student()` (using `add()` in Set)
     - `remove_student()` (using `remove()` in Set)
-    -  `find_student()` (using 'contains()` in Set)
+    - `find_student()` (using 'contains()` in Set)
     - `get_common_students()` (using `intersection()` in Set)
     - `get_students_only_in_one_course(self, other, primary_course='a')` (both using `difference()` in Set)
     - `get_all_students()` (using `union()` in Set)
@@ -70,39 +70,39 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
   - `get_students_only_in_one_course(self, other, primary_course='a')`
 - Track students in both courses 
     - `get_common_students(students_a, students_b)`
-- Track all studnets across both course
+- Track all students across both course
    - `get_all_students(students_a, students_b)`
 - Manage Enrollment Roster to read from a CSV file
   ```
-    def write_roster(self, filename):
-        try:
-            with open(filename, 'w', newline='') as csvfile:
-                fieldnames = ['id', 'name']
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                writer.writeheader()
-                for student in self.students:
-                    writer.writerow(student)
-        except (IOError, OSError) as e:
-            print(f"Error writing roster to file: {e}")
-        except KeyError as e:
-            print(f"Error: Student data missing required key '{e}'")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+  def write_roster(self, filename):
+      try:
+          with open(filename, 'w', newline='') as csvfile:
+              fieldnames = ['id', 'name']
+              writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+              writer.writeheader()
+              for student in self.students:
+                  writer.writerow(student)
+      except (IOError, OSError) as e:
+          print(f"Error writing roster to file: {e}")
+      except KeyError as e:
+          print(f"Error: Student data missing required key '{e}'")
+      except Exception as e:
+          print(f"An unexpected error occurred: {e}")
     ```
 - Manage Enrollment Roster to write into a CSV file
   ```
-    def read_roster(self, filename):
-        try:
-            with open(filename, 'r') as csvfile:
-                reader = csv.DictReader(csvfile)
-                for row in reader:
-                    self.add_student(row)
-        except (IOError, OSError) as e:
-            print(f"Error reading roster from file: {e}")
-        except KeyError as e:
-            print(f"Error: CSV data missing required column '{e}'")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+  def read_roster(self, filename):
+      try:
+          with open(filename, 'r') as csvfile:
+              reader = csv.DictReader(csvfile)
+              for row in reader:
+                  self.add_student(row)
+      except (IOError, OSError) as e:
+          print(f"Error reading roster from file: {e}")
+      except KeyError as e:
+          print(f"Error: CSV data missing required column '{e}'")
+      except Exception as e:
+          print(f"An unexpected error occurred: {e}")
   ```
 
 ### 2) Test Cases 
