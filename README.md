@@ -67,7 +67,7 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
 - Track students enrolled for either courseA or courseB
     - `students_a.find_student(element)` & `students_b.find_student(element)`
 - Track students only in courseA or courseB
-  - `get_students_only_in_course_a(students_a, students_b)` & `get_students_only_in_course_b(students_b, students_a)`
+  - `get_students_only_in_one_course(self, other, primary_course='a')`
 - Track students in both courses 
     - `get_common_students(students_a, students_b)`
 - Track all studnets across both course
