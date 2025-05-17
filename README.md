@@ -105,8 +105,84 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
           print(f"An unexpected error occurred: {e}")
   ```
 
-### 2) Test Cases 
+### 2) Test Cases
+- Each class module file, `Set.py` and `EnrollmentManager.py` contains a set of integrated tests that can be run directly in Python.
+##### Set
+```shell
+python Set.py
+```
+- Expected output of the test is shown below
+```text
+Course A contains 'Bob': True
+Course B contains 'Charlie': True
+Course A before removing 'Charlie': [{'id': 1001, 'name': 'Alice'}, {'id': 1002, 'name': 'Bob'}, {'id': 1003, 'name': 'Charlie'}]
+Course A after removing 'Charlie': [{'id': 1001, 'name': 'Alice'}, {'id': 1002, 'name': 'Bob'}]
+Union of A and B: [{'id': 1001, 'name': 'Alice'}, {'id': 1002, 'name': 'Bob'}, {'id': 1003, 'name': 'Charlie'}, {'id': 1004, 'name': 'Eva'}]
+Intersection of A and B: [{'id': 1002, 'name': 'Bob'}]
+Difference A - B: [{'id': 1001, 'name': 'Alice'}]
+Difference B - A: [{'id': 1003, 'name': 'Charlie'}, {'id': 1004, 'name': 'Eva'}]
+```
+##### EnrollmentManager
+```shell
+python EnrollmentManager.py
+```
+- Expected output of the test is shown below
+```text
+Students in both courses: [{'id': 1002, 'name': 'Bob'}, {'id': 1003, 'name': 'Charlie'}]
+Only in Course A: [{'id': 1001, 'name': 'Alice'}]
+Only in Course B: [{'id': 1004, 'name': 'Eva'}]
+All students across both courses: [{'id': 1001, 'name': 'Alice'}, {'id': 1002, 'name': 'Bob'}, {'id': 1003, 'name': 'Charlie'}, {'id': 1004, 'name': 'Eva'}]
 
+Writing rosters to files...
+Reading rosters from files...
+
+Students in course_a_from_roster:
+{'id': '1001', 'name': 'Alice'}
+{'id': '1002', 'name': 'Bob'}
+{'id': '1003', 'name': 'Charlie'}
+
+Students in course_b_from_roster:
+{'id': '1002', 'name': 'Bob'}
+{'id': '1003', 'name': 'Charlie'}
+{'id': '1004', 'name': 'Eva'}
+```
+#### Unit Tests
+- Unit tests for all modules are implemented with Pytest and can be run with the following command
+```shell
+pytest -vv test.py
+```
+- Sample output of the unit tests are shown below
+```
+========================================================= test session starts ==========================================================
+platform darwin -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13
+cachedir: .pytest_cache
+rootdir: /Users/tim/School/cs-034-lab-12
+collected 21 items                                                                                                                     
+
+test.py::test_node_initialization PASSED                                                                                         [  4%]
+test.py::test_node_string_representation PASSED                                                                                  [  9%]
+test.py::test_node_left_child PASSED                                                                                             [ 14%]
+test.py::test_node_right_child PASSED                                                                                            [ 19%]
+test.py::test_node_get_successor PASSED                                                                                          [ 23%]
+test.py::test_node_get_predecessor PASSED                                                                                        [ 28%]
+test.py::test_set_storage_root PASSED                                                                                            [ 33%]
+test.py::test_set_contains_membership PASSED                                                                                     [ 38%]
+test.py::test_set_add PASSED                                                                                                     [ 42%]
+test.py::test_set_remove PASSED                                                                                                  [ 47%]
+test.py::test_set_to_list PASSED                                                                                                 [ 52%]
+test.py::test_set_union PASSED                                                                                                   [ 57%]
+test.py::test_set_intersection PASSED                                                                                            [ 61%]
+test.py::test_set_difference PASSED                                                                                              [ 66%]
+test.py::test_read_roster PASSED                                                                                                 [ 71%]
+test.py::test_add_student PASSED                                                                                                 [ 76%]
+test.py::test_remove_student PASSED                                                                                              [ 80%]
+test.py::test_find_student PASSED                                                                                                [ 85%]
+test.py::test_get_all_students PASSED                                                                                            [ 90%]
+test.py::test_get_common_students PASSED                                                                                         [ 95%]
+test.py::test_get_students_only_in_one_course PASSED                                                                             [100%]
+
+========================================================== 21 passed in 0.01s ==========================================================
+```
 Requirement
 - Design Document (PDF or Markdown) including:
   - Class diagram (UML) or CRC cards for your `Set` class and the `EnrollmentManager` class 
