@@ -211,59 +211,6 @@ class EnrollmentManager:
             # Handle invalid primary_course value, e.g., raise an error
             raise ValueError("primary_course must be 'a' or 'b'")
 
-    def add_course(self, course):
-        """
-        Adds a course to the Set of courses.
-        
-        Parameters
-        ----------
-        course : Set
-        
-        Returns
-        -------
-        None
-        """
-        self.courses.add(course)
-
-    def remove_course(self, course):
-        """
-        Removes a course from the Set of courses.
-        
-        Parameters
-        ----------
-        course : Set
-        
-        Returns
-        -------
-        None
-        """
-        self.courses.remove(course)
-
-    def get_all_courses(self):
-        """
-        Returns all the courses from the Set of courses.
-        
-        Returns
-        -------
-        list
-        """
-        return self.courses.to_list()
-
-    def get_courses_for_student(self, student):
-        """
-        Returns a Set containing the courses that a student is enrolled in
-        
-        Parameters
-        ----------
-        student : key-value pair of student id and name
-        
-        Returns
-        -------
-        Set
-        """
-        return self.courses.intersection(student.courses)
-
-
     def __str__(self):
         """
         Returns a string representation of the Set of students and Set of courses
