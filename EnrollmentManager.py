@@ -136,20 +136,23 @@ class EnrollmentManager:
         """            
         self.students.remove(student)
 
-    def find_student(self, student_id):
+    def find_student(self, student):
         """
         Finds a student from the Set of students.
         
         Parameters
         ----------
-        student_id : key value in the dictionary which is an int
+        student: key-value pair of id and name
         
         Returns
         -------
         bool
         """            
-        return self.students.contains(student_id)
+        return self.students.contains(student)
 
+    # Methods for set operations (union, intersection, difference) would
+    # need to take other BSTSet instances as arguments, representing
+    # the rosters of specific courses (like the sets loaded from CSVs).
     def get_all_students(self, other_course):
         """
         Returns the union of two Sets of students in two different courses
