@@ -18,8 +18,8 @@ def get_student_id(student):
 
 class EnrollmentManager:
     def __init__(self):
-        self.students = BSTSet(get_student_id)
-        self.courses = BSTSet()
+        self.students = Set(get_student_id)
+        self.courses = Set()
 
 
     def write_roster(self, filename):
