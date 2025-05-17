@@ -9,7 +9,7 @@ import csv
 import random
 
 class BSTNode:
-     """
+    """
     BST nodes are used to implement our Set.
 
     Attributes
@@ -35,8 +35,7 @@ class BSTNode:
         self.right = None
 
     def __str__(self):
-        return f"({self.key}, {self.element})"
-         """
+        """
         Returns a string representation of a BSTNode's key and element.
         
         Parameters
@@ -47,6 +46,8 @@ class BSTNode:
         -------
         str
         """
+        return f"({self.key}, {self.element})"
+         
     def get_successor(self):
         """
         Returns the in-order successor of this node in the BST.
@@ -135,7 +136,6 @@ class Set:
 
 
     def __iter__(self):
-        yield from self._in_order_with_elements(self.storage_root)
         """
         Returns the minimum node in the BST
         
@@ -143,8 +143,8 @@ class Set:
         -------
         BSTNode
         """
+        yield from self._in_order_with_elements(self.storage_root)
 
-    
     def _in_order_with_elements(self, node):
         """
         Traverses the BST in order
@@ -316,17 +316,17 @@ class Set:
 
 # define a concrete get_key_function() which can be used as arguement for Set constructor
 def get_id_key(dictionary):
-        """
-        Returns the id key of an element in a dictionary.
+   """
+   Returns the id key of an element in a dictionary.
 
-        Parameters
-        ----------
-        dictionary : dictionary (string and int pairs)
+   Parameters
+   ----------
+   dictionary : dictionary (string and int pairs)
 
-        Returns
-        -------
-        int
-        """
+   Returns
+   -------
+   int
+   """
     return dictionary["id"]
 
 
