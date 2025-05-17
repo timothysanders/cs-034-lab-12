@@ -4,7 +4,7 @@
 
 #Course: Spr25_CS_034 CRN 39575
 from Set import BSTNode
-from Set import BSTSet
+from Set import Set
 from EnrollmentManager import EnrollmentManager
 from EnrollmentManager import get_student_id
 
