@@ -52,19 +52,19 @@ In this lab, our primary focus is demonstrating set operations—union, intersec
 
 ### 1) Our team has built a Course Enrollment Manager `EnrollmentManager` that uses our BST-based `Set` class to:
 
-- Instantiate two course sets: course_a, course_b
+- Instantiate two student sets: `students_a` for courseA, `students_b` for courseB
 
 - Enroll and Disenroll students for two different courses: courseA, courseB
-    - `course_a.add(element)` & `course_b.add(element)`
-    - `course_a.remove(element)` & `course_b.remove(element)`
+    - `students_a.add(element)` & `students_b.add(element)`
+    - `students_a.remove(element)` & `students_b.remove(element)`
 - Track students enrolled for either courseA or courseB
-    - `course_a.contains(element)` & `course_b.contains(element)`
+    - `students_a.contains(element)` & `students_b.contains(element)`
 - Track students only in courseA or courseB
-  - `difference(course_a)`
+  - `difference(students_a, students_b)` & `difference(students_b, students_a)`
 - Track students in both courses 
-    - `intersection(otherSet)`
+    - `intersection(students_a, students_b)`
 - Track all studnets across both course
-   - `union(otherSet)`
+   - `union(students_a, students_b)`
 - Manage Enrollment Roster to read from a CSV file
   ```
     def write_roster(self, filename):
