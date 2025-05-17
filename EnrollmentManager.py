@@ -257,7 +257,7 @@ class EnrollmentManager:
 
 
     def __str__(self):
-       """
+        """
         Returns a string representation of the Set of students and Set of courses
         
         Returns
