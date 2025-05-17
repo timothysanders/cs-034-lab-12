@@ -138,7 +138,7 @@ class Set:
 
 
     def union(self, other_set):
-        result = BSTSet(self.get_key)
+        result = Set(self.get_key)
         for element in self:
             result.add(element)
         for element in other_set:
@@ -147,7 +147,7 @@ class Set:
 
 
     def intersection(self, other_set):
-        result = BSTSet(self.get_key)
+        result = Set(self.get_key)
         for element in self:
             if other_set.contains(element):
                 result.add(element)
@@ -155,7 +155,7 @@ class Set:
 
 
     def difference(self, other_set):
-        result = BSTSet(self.get_key)
+        result = Set(self.get_key)
         for element in self:
             if not other_set.contains(element):
                 result.add(element)
