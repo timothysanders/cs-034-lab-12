@@ -80,49 +80,49 @@ class Set:
             yield from self._in_order_with_elements(node.right)
 
 
-    def add(self, new_element):
-        new_element_key = self.get_key(new_element)
+    def add(self, element):
+        key = self.get_key(element)
 
-        def _insert(node, new_element, new_element_key):
+        def _insert(node, element, key):
             if not node:
-                return BSTNode(new_element, new_element_key)
-            if new_element_key < node.key:
-                node.left = _insert(node.left, new_element, new_element_key)
-            elif new_element_key > node.key:
-                node.right = _insert(node.right, new_element, new_element_key)
+                return BSTNode(element, key)
+            if key < node.key:
+                node.left = _insert(node.left, element, key)
+            elif key > node.key:
+                node.right = _insert(node.right, element, key)
 
             return node
 
-        self.storage_root = _insert(self.storage_root, new_element, new_element_key)
+        self.storage_root = _insert(self.storage_root, element, key)
 
 
-    def contains(self, new_element):
-        new_element_key = self.get_key(new_element)
+    def contains(self, element):
+        key = self.get_key(element)
 
-        def _search(node, new_element_key):
+        def _search(node, key):
             if not node:
                 return False
-            if new_element_key == node.key:
+            if key == node.key:
                 return True
-            elif new_element_key < node.key:
-                return _search(node.left, new_element_key)
+            elif key < node.key:
+                return _search(node.left, key)
             else:
-                return _search(node.right, new_element_key)
+                return _search(node.right, key)
 
-        return _search(self.storage_root, new_element_key)
+        return _search(self.storage_root, key)
 
 
     def remove(self, element):
-        element_key = self.get_key(element)
+        key = self.get_key(element)
 
-        def _delete(node, element_key):
+        def _delete(node, key):
             if not node:
                 print("Empty Set")
                 return None               
-            if element_key < node.key:
-                node.left = _delete(node.left, element_key)
-            elif element_key > node.key:
-                node.right = _delete(node.right, element_key)
+            if key < node.key:
+                node.left = _delete(node.left, key)
+            elif key > node.key:
+                node.right = _delete(node.right, key)
             else:
                 if not node.left:
                     return node.right
@@ -134,7 +134,7 @@ class Set:
                 node.right = _delete(node.right, successor.key)
             return node
 
-        self.storage_root = _delete(self.storage_root, element_key)
+        self.storage_root = _delete(self.storage_root, key)
 
 
     def union(self, other_set):
@@ -164,7 +164,7 @@ class Set:
     def to_list(self):
         return [node.element for node in self] 
 
-
+# define a concrete get_key_function() which can be used as arguement for Set constructor
 def get_id_key(dictionary):
     return dictionary["id"]
 
