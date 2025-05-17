@@ -8,7 +8,7 @@
 import csv
 import random
 from BSTNode import BSTNode
-from Set import BSTSet
+from Set import Set
 
 # get_key_function for the intialize Set based on BST
 # =====================================================
