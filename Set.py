@@ -316,17 +316,17 @@ class Set:
 
 # define a concrete get_key_function() which can be used as arguement for Set constructor
 def get_id_key(dictionary):
-   """
-   Returns the id key of an element in a dictionary.
+    """
+    Returns the id key of an element in a dictionary.
 
-   Parameters
-   ----------
-   dictionary : dictionary (string and int pairs)
+    Parameters
+    ----------
+    dictionary : dictionary (string and int pairs)
 
-   Returns
-   -------
-   int
-   """
+    Returns
+    -------
+    int
+    """
     return dictionary["id"]
 
 
