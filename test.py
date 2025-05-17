@@ -22,6 +22,14 @@ def test_node():
     return test_node
 
 @pytest.fixture
+def test_set():
+    test_set = Set(get_key_function=str.lower)
+    test_set.add(element="Tim")
+    test_set.add(element="miles")
+    test_set.add(element="mae")
+    return test_set
+
+@pytest.fixture
 def test_course():
     test_course = EnrollmentManager()
     test_students = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
@@ -70,6 +78,72 @@ def test_node_get_predecessor(test_node):
     assert test_node_predecessor.key == 1001
     assert test_node_predecessor.element == "Mae"
 
+def test_set_storage_root(test_set):
+    assert type(test_set.storage_root) == BSTNode
+    assert test_set.storage_root.key == "tim"
+
+def test_set_contains_membership(test_set):
+    assert test_set.contains("TIM")
+    assert test_set.contains("Tim")
+    assert test_set.contains("tim")
+
+def test_set_add(test_set):
+    test_set.add("MISTY")
+    assert test_set.contains("MISTY")
+    assert test_set.contains("Misty")
+    assert test_set.contains("misty")
+    assert test_set.contains("miles")
+    assert test_set.contains("mae")
+    assert test_set.contains("tim")
+
+def test_set_remove(test_set):
+    assert test_set.contains("miles")
+    assert test_set.contains("mae")
+    assert test_set.contains("tim")
+    test_set.remove("tim")
+    assert not test_set.contains("tim")
+    assert test_set.contains("miles")
+    assert test_set.contains("mae")
+
+def test_set_to_list(test_set):
+    assert test_set.to_list() == ["mae", "miles", "Tim"]
+
+def test_set_union(test_set):
+    test_union_set = Set(get_key_function=str.lower)
+    test_union_set.add("Tim")
+    test_union_set.add("Megan")
+    test_union_set.add("Michael")
+    union_result_set = test_set.union(test_union_set)
+    assert len(test_set.to_list()) == 3
+    assert len(test_union_set.to_list()) == 3
+    assert union_result_set.contains("miles")
+    assert union_result_set.contains("mae")
+    assert union_result_set.contains("michael")
+    assert union_result_set.contains("megan")
+    assert union_result_set.contains("tim")
+    assert len(union_result_set.to_list()) == 5
+
+def test_set_intersection(test_set):
+    test_intersection_set = Set(get_key_function=str.lower)
+    test_intersection_set.add("Tim")
+    test_intersection_set.add("Megan")
+    test_intersection_set.add("Michael")
+    intersection_result_set = test_set.intersection(test_intersection_set)
+    assert intersection_result_set.contains("tim")
+    assert not intersection_result_set.contains("megan")
+    assert not intersection_result_set.contains("miles")
+    assert len(intersection_result_set.to_list()) == 1
+
+def test_set_difference(test_set):
+    test_difference_set = Set(get_key_function=str.lower)
+    test_difference_set.add("Tim")
+    test_difference_set.add("Megan")
+    test_difference_set.add("Michael")
+    difference_result_set = test_set.difference(test_difference_set)
+    assert not difference_result_set.contains("tim")
+    assert difference_result_set.contains("miles")
+    assert difference_result_set.contains("mae")
+    assert len(difference_result_set.to_list()) == 2
 
 if __name__ == "__main__":
     course_a = EnrollmentManager()
