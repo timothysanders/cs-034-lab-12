@@ -36,10 +36,24 @@ class BSTNode:
 
     def __str__(self):
         return f"({self.key}, {self.element})"
+         """
+        Returns a string representation of a BSTNode's key and element.
+        
+        Parameters
+        ----------
+        self
 
+        Returns
+        -------
+        str
+        """
     def get_successor(self):
         """
         Returns the in-order successor of this node in the BST.
+
+        Returns
+        -------
+        BSTNode
         """
         # If right child exists, successor is the leftmost node in right subtree
         if self.right:
@@ -62,6 +76,10 @@ class BSTNode:
     def get_predecessor(self):
         """
         Returns the in-order predecessor of this node in the BST.
+    
+        Returns
+        -------
+        BSTNode
         """
         # Case 1: If left child exists, go down to rightmost node in left subtree
         if self.left:
@@ -118,9 +136,27 @@ class Set:
 
     def __iter__(self):
         yield from self._in_order_with_elements(self.storage_root)
+        """
+        Returns the minimum node in the BST
+        
+        Returns
+        -------
+        BSTNode
+        """
 
     
     def _in_order_with_elements(self, node):
+        """
+        Traverses the BST in order
+        
+        Parameters
+        ----------
+        node : BSTNode
+        
+        Returns
+        -------
+        Any
+        """
         if node:
             yield from self._in_order_with_elements(node.left)
             yield node.element
@@ -128,6 +164,18 @@ class Set:
 
 
     def add(self, element):
+        """
+        Insert an element into the Set.
+
+        Parameters
+        ----------
+        element : Any
+
+        Returns
+        -------
+        None
+        """
+
         key = self.get_key(element)
 
         def _insert(node, element, key):
@@ -144,6 +192,17 @@ class Set:
 
 
     def contains(self, element):
+        """
+        Searches the Set to see if an element is contained in the Set.
+
+        Parameters
+        ----------
+        element : Any
+
+        Returns
+        -------
+        bool
+        """
         key = self.get_key(element)
 
         def _search(node, key):
@@ -160,6 +219,17 @@ class Set:
 
 
     def remove(self, element):
+        """
+        Removes an element from the set.
+
+        Parameters
+        ----------
+        element : Any
+
+        Returns
+        -------
+        None
+        """
         key = self.get_key(element)
 
         def _delete(node, key):
@@ -185,6 +255,17 @@ class Set:
 
 
     def union(self, other_set):
+        """
+        Return the union of two sets.
+
+        Parameters
+        ----------
+        other_set : Set
+
+        Returns
+        -------
+        Set
+        """
         result = Set(self.get_key)
         for element in self:
             result.add(element)
@@ -194,6 +275,17 @@ class Set:
 
 
     def intersection(self, other_set):
+        """
+        Return the intersection of two sets.
+
+        Parameters
+        ----------
+        other_set : Set
+
+        Returns
+        -------
+        Set
+        """
         result = Set(self.get_key)
         for element in self:
             if other_set.contains(element):
@@ -202,6 +294,17 @@ class Set:
 
 
     def difference(self, other_set):
+        """
+        Return the difference of two sets.
+
+        Parameters
+        ----------
+        other_set : Set
+
+        Returns
+        -------
+        Set
+        """
         result = Set(self.get_key)
         for element in self:
             if not other_set.contains(element):
@@ -213,6 +316,17 @@ class Set:
 
 # define a concrete get_key_function() which can be used as arguement for Set constructor
 def get_id_key(dictionary):
+        """
+        Returns the id key of an element in a dictionary.
+
+        Parameters
+        ----------
+        dictionary : dictionary (string and int pairs)
+
+        Returns
+        -------
+        int
+        """
     return dictionary["id"]
 
 
