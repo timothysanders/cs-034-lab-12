@@ -4,13 +4,10 @@
 
 #Course: Spr25_CS_034 CRN 39575
 
-
 import csv
-import random
-from Set import BSTNode
 from Set import Set
 
-# get_key_function for the intialize Set based on BST
+# get_key_function for the initialize Set based on BST
 # =====================================================
 def get_student_id(student):
     return student['id']
@@ -59,7 +56,7 @@ class EnrollmentManager:
         self.courses = Set()
 
 
-    def write_roster(self, filename):
+    def write_roster(self, filename: str) -> None:
         """
         Opens a csv file and writes in the roster including a student's name and id.
         
@@ -70,7 +67,7 @@ class EnrollmentManager:
         Returns
         -------
         None
-        """        
+        """
         try:
             with open(filename, 'w', newline='') as csvfile:
                 fieldnames = ['id', 'name']
@@ -85,7 +82,7 @@ class EnrollmentManager:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def read_roster(self, filename):
+    def read_roster(self, filename: str) -> None:
         """
         Opens a csv file and reads in the roster of students.
         
@@ -96,7 +93,7 @@ class EnrollmentManager:
         Returns
         -------
         None
-        """             
+        """
         try:
             with open(filename, 'r') as csvfile:
                 reader = csv.DictReader(csvfile)
@@ -109,20 +106,21 @@ class EnrollmentManager:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
     
-    def add_student(self, student):
-        self.students.add(student)
+    def add_student(self, student) -> None:
         """
         Adds a student to the Set of students.
-        
+
         Parameters
         ----------
         student : key-value pair of id and name
-        
+
         Returns
         -------
         None
-        """     
-    def remove_student(self, student):
+        """
+        self.students.add(student)
+
+    def remove_student(self, student) -> None:
         """
         Removes a student from the Set of students.
         
@@ -133,69 +131,76 @@ class EnrollmentManager:
         Returns
         -------
         None
-        """            
+        """
         self.students.remove(student)
 
-    def find_student(self, student):
+    def find_student(self, student: str) -> bool:
         """
         Finds a student from the Set of students.
         
         Parameters
         ----------
-        student: key-value pair of id and name
+        student: str
+            key-value pair of id and name
         
         Returns
         -------
         bool
-        """            
+        """
         return self.students.contains(student)
 
     # Methods for set operations (union, intersection, difference) would
     # need to take other BSTSet instances as arguments, representing
     # the rosters of specific courses (like the sets loaded from CSVs).
-    def get_all_students(self, other_course):
+    def get_all_students(self, other_course: "EnrollmentManager") -> "Set":
         """
         Returns the union of two Sets of students in two different courses
         (students that are in course a and course b combined).
         
         Parameters
         ----------
-        other_course : Set
+        other_course : EnrollmentManager
         
         Returns
         -------
         Set
-        """         
+        """
         return self.students.union(other_course.students)
 
-    def get_common_students(self, other_course):
+    def get_common_students(self, other_course: "EnrollmentManager") -> Set:
         """
         Returns the intersection of two Sets of students in two different courses
         (students that are in both course a and course b).
         
         Parameters
         ----------
-        other_course : Set
+        other_course : EnrollmentManager
         
         Returns
         -------
         Set
-        """         
+        """
         return self.students.intersection(other_course.students)
 
-    def get_students_only_in_one_course(self, other, primary_course='a'):
+    def get_students_only_in_one_course(self, other: "EnrollmentManager", primary_course: str ='a') -> "Set":
         """
         Returns the difference of two Sets of students in two different courses (Either students
         only in course a or course b). 
         
         Parameters
         ----------
-        other : Set
-        primary_course : Set
+        other : EnrollmentManager
+        primary_course : str
+
         Returns
         -------
         Set
-        """          
+
+        Raises
+        ------
+        ValueError
+            If the primary_course value specified is not 'a' or 'b'
+        """
         if primary_course.lower() == 'a':
             # Students in self.students but not in other.students
             return self.students.difference(other.students)
@@ -217,7 +222,7 @@ class EnrollmentManager:
         Returns
         -------
         None
-        """          
+        """
         self.courses.add(course)
 
     def remove_course(self, course):
@@ -231,7 +236,7 @@ class EnrollmentManager:
         Returns
         -------
         None
-        """            
+        """
         self.courses.remove(course)
 
     def get_all_courses(self):
@@ -241,7 +246,7 @@ class EnrollmentManager:
         Returns
         -------
         list
-        """             
+        """
         return self.courses.to_list()
 
     def get_courses_for_student(self, student):
@@ -255,7 +260,7 @@ class EnrollmentManager:
         Returns
         -------
         Set
-        """            
+        """
         return self.courses.intersection(student.courses)
 
 
@@ -266,7 +271,7 @@ class EnrollmentManager:
         Returns
         -------
         str
-        """          
+        """
         return f"Students: {self.students}\nCourses: {self.courses}"
 
 
@@ -284,14 +289,14 @@ if __name__ == "__main__":
 
     test_output = {
         "Students in both courses": course_a.get_common_students(course_b).to_list(),
-        "Only in Course A": course_a.get_students_only_in_course_a(course_b).to_list(),
-        "Only in Course B": course_a.get_students_only_in_course_b(course_b).to_list(),
+        "Only in Course A": course_a.get_students_only_in_one_course(course_b).to_list(),
+        "Only in Course B": course_a.get_students_only_in_one_course(course_b, primary_course="b").to_list(),
         "All students across both courses": course_a.get_all_students(course_b).to_list()
     }
 
     for key, value in test_output.items():
-        print()
         print(f"{key}: {value}")
+    print()
 
     # Roster Management Demonstration
     roster_filename_a = "course_a_roster.csv"

@@ -5,9 +5,6 @@
 #Course: Spr25_CS_034 CRN 39575
 #----------------------------------------------
 
-import csv
-import random
-
 class BSTNode:
     """
     BST nodes are used to implement our Set.
@@ -34,7 +31,7 @@ class BSTNode:
         self.left = None
         self.right = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Returns a string representation of a BSTNode's key and element.
         
@@ -48,7 +45,7 @@ class BSTNode:
         """
         return f"({self.key}, {self.element})"
          
-    def get_successor(self):
+    def get_successor(self) -> "BSTNode":
         """
         Returns the in-order successor of this node in the BST.
 
@@ -74,7 +71,7 @@ class BSTNode:
         return current.parent
 
 
-    def get_predecessor(self):
+    def get_predecessor(self) -> "BSTNode":
         """
         Returns the in-order predecessor of this node in the BST.
     
@@ -102,7 +99,7 @@ class BSTNode:
 
 class Set:
     """
-    The Set abstract data type is implented using BST Nodes.
+    The Set abstract data type is implemented using BST Nodes.
 
     Attributes
     ----------
@@ -145,7 +142,7 @@ class Set:
         """
         yield from self._in_order_with_elements(self.storage_root)
 
-    def _in_order_with_elements(self, node):
+    def _in_order_with_elements(self, node: "BSTNode"):
         """
         Traverses the BST in order
         
@@ -163,7 +160,7 @@ class Set:
             yield from self._in_order_with_elements(node.right)
 
 
-    def add(self, element):
+    def add(self, element) -> None:
         """
         Insert an element into the Set.
 
@@ -191,7 +188,7 @@ class Set:
         self.storage_root = _insert(self.storage_root, element, key)
 
 
-    def contains(self, element):
+    def contains(self, element) -> bool:
         """
         Searches the Set to see if an element is contained in the Set.
 
@@ -218,7 +215,7 @@ class Set:
         return _search(self.storage_root, key)
 
 
-    def remove(self, element):
+    def remove(self, element) -> None:
         """
         Removes an element from the set.
 
@@ -254,7 +251,7 @@ class Set:
         self.storage_root = _delete(self.storage_root, key)
 
 
-    def union(self, other_set):
+    def union(self, other_set: "Set") -> "Set":
         """
         Return the union of two sets.
 
@@ -274,7 +271,7 @@ class Set:
         return result
 
 
-    def intersection(self, other_set):
+    def intersection(self, other_set: "Set") -> "Set":
         """
         Return the intersection of two sets.
 
@@ -293,7 +290,7 @@ class Set:
         return result
 
 
-    def difference(self, other_set):
+    def difference(self, other_set: "Set") -> "Set":
         """
         Return the difference of two sets.
 
