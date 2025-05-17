@@ -25,7 +25,7 @@ class EnrollmentManager:
     def write_roster(self, filename):
         try:
             with open(filename, 'w', newline='') as csvfile:
-                fieldnames = ['id', 'name', 'courses']
+                fieldnames = ['id', 'name']
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
                 for student in self.students:
