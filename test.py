@@ -3,6 +3,8 @@
 #Date: 5/11/25
 
 #Course: Spr25_CS_034 CRN 39575
+import csv
+
 import pytest
 
 from Set import BSTNode
@@ -37,6 +39,29 @@ def test_course():
         test_course.add_student(student)
     return test_course
 
+@pytest.fixture(scope="session")
+def test_roster_file_a(tmp_path_factory):
+    test_students = [{"id": 1001, "name": "Mae"}, {"id": 1002, "name": "Miles"}, {"id": 1003, "name": "Misty"}, {"id": 1013, "name": "Tim"}]
+    fn = tmp_path_factory.mktemp("data") / "test_course.csv"
+    with open(fn, 'w', newline='') as csvfile:
+        fieldnames = ['id', 'name']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for student in test_students:
+            writer.writerow(student)
+    return fn
+
+@pytest.fixture(scope="session")
+def test_roster_file_b(tmp_path_factory):
+    test_students = [{"id": 1011, "name": "Megan"}, {"id": 1012, "name": "Michael"}, {"id": 1013, "name": "Tim"}]
+    fn = tmp_path_factory.mktemp("data") / "test_course.csv"
+    with open(fn, 'w', newline='') as csvfile:
+        fieldnames = ['id', 'name']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for student in test_students:
+            writer.writerow(student)
+    return fn
 def test_node_initialization():
     test_node = BSTNode(element="Tim", key=1010)
     assert test_node.key == 1010
@@ -145,25 +170,99 @@ def test_set_difference(test_set):
     assert difference_result_set.contains("mae")
     assert len(difference_result_set.to_list()) == 2
 
+def test_read_roster(test_roster_file_a):
+    test_enrollment_manager = EnrollmentManager()
+    assert test_enrollment_manager.students.to_list() == []
+    test_enrollment_manager.read_roster(test_roster_file_a)
+    assert test_enrollment_manager.students.to_list() ==  [{"id": "1001", "name": "Mae"}, {"id": "1002", "name": "Miles"}, {"id": "1003", "name": "Misty"}, {"id": "1013", "name": "Tim"}]
+
+def test_add_student(test_roster_file_a):
+    test_enrollment_manager = EnrollmentManager()
+    test_enrollment_manager.read_roster(test_roster_file_a)
+    test_enrollment_manager.add_student({"id": "1030", "name": "Danielle"})
+    assert {"id": "1030", "name": "Danielle"} in test_enrollment_manager.students.to_list()
+
+def test_remove_student(test_roster_file_a):
+    test_enrollment_manager = EnrollmentManager()
+    test_enrollment_manager.read_roster(test_roster_file_a)
+    test_enrollment_manager.remove_student({"id": "1001", "name": "Mae"})
+    assert {"id": "1001", "name": "Mae"} not in test_enrollment_manager.students.to_list()
+
+def test_find_student(test_roster_file_a):
+    test_enrollment_manager = EnrollmentManager()
+    test_enrollment_manager.read_roster(filename=test_roster_file_a)
+    assert test_enrollment_manager.find_student({"id": "1001", "name": "Mae"})
+
+def test_get_all_students(test_roster_file_a, test_roster_file_b):
+    test_enrollment_manager_a = EnrollmentManager()
+    test_enrollment_manager_a.read_roster(filename=test_roster_file_a)
+    test_enrollment_manager_b = EnrollmentManager()
+    test_enrollment_manager_b.read_roster(filename=test_roster_file_b)
+    expected_students = [
+        {'id': '1001', 'name': 'Mae'},
+        {'id': '1002', 'name': 'Miles'},
+        {'id': '1003', 'name': 'Misty'},
+        {'id': '1011', 'name': 'Megan'},
+        {'id': '1012', 'name': 'Michael'},
+        {'id': '1013', 'name': 'Tim'}
+    ]
+    assert test_enrollment_manager_a.get_all_students(test_enrollment_manager_b).to_list() == expected_students
+
+def test_get_common_students(test_roster_file_a, test_roster_file_b):
+    test_enrollment_manager_a = EnrollmentManager()
+    test_enrollment_manager_a.read_roster(filename=test_roster_file_a)
+    test_enrollment_manager_b = EnrollmentManager()
+    test_enrollment_manager_b.read_roster(filename=test_roster_file_b)
+    expected_students = [
+        {"id": "1013", "name": "Tim"}
+    ]
+    unexpected_students = [
+        {"id": "1001", "name": "Mae"}
+    ]
+    assert test_enrollment_manager_a.get_common_students(test_enrollment_manager_b).to_list() == expected_students
+    assert not test_enrollment_manager_a.get_common_students(test_enrollment_manager_b).to_list() == unexpected_students
+
+def test_get_students_only_in_one_course(test_roster_file_a, test_roster_file_b):
+    test_enrollment_manager_a = EnrollmentManager()
+    test_enrollment_manager_a.read_roster(filename=test_roster_file_a)
+    test_enrollment_manager_b = EnrollmentManager()
+    test_enrollment_manager_b.read_roster(filename=test_roster_file_b)
+    expected_students_a = [{'id': '1001', 'name': 'Mae'}, {'id': '1002', 'name': 'Miles'}, {'id': '1003', 'name': 'Misty'}]
+    unexpected_students_a = [
+        {"id": "1013", "name": "Tim"}
+    ]
+    expected_students_b = [
+        {"id": "1011", "name": "Megan"}, {"id": "1012", "name": "Michael"}
+    ]
+    unexpected_students_b = [
+        {"id": "1013", "name": "Tim"}
+    ]
+    assert test_enrollment_manager_a.get_students_only_in_one_course(test_enrollment_manager_b).to_list() == expected_students_a
+    assert not test_enrollment_manager_a.get_students_only_in_one_course(test_enrollment_manager_b).to_list() == unexpected_students_a
+    assert test_enrollment_manager_a.get_students_only_in_one_course(test_enrollment_manager_b, primary_course="b").to_list() == expected_students_b
+    assert not test_enrollment_manager_a.get_students_only_in_one_course(test_enrollment_manager_b, primary_course="b").to_list() == unexpected_students_b
+
+# Integrated demonstration of core class functionalities
+# The integration test constructs the EnrollmentManager objects,
+# reads course rosters from two CSV files, and demonstrates a set of functionality
 if __name__ == "__main__":
     course_a = EnrollmentManager()
     course_b = EnrollmentManager()
 
-    students_a = [{"id": 1001, "name": "Alice"}, {"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}]
-    students_b = [{"id": 1002, "name": "Bob"}, {"id": 1003, "name": "Charlie"}, {"id": 1004, "name": "Eva"}]
-
-    for student in students_a:
-        course_a.add_student(student)
-    for student in students_b:
-        course_b.add_student(student)
+    course_a.read_roster("courseA.csv")
+    course_b.read_roster("courseB.csv")
 
     test_output = {
         "Students in both courses": course_a.get_common_students(course_b).to_list(),
-        "Only in Course A": course_a.get_students_only_in_course_a(course_b).to_list(),
-        "Only in Course B": course_a.get_students_only_in_course_b(course_b).to_list(),
+        "Only in Course A": course_a.get_students_only_in_one_course(course_b).to_list(),
+        "Only in Course B": course_a.get_students_only_in_one_course(course_b, primary_course="b").to_list(),
         "All students across both courses": course_a.get_all_students(course_b).to_list()
     }
 
+    print("Integration Test Report")
+    print("-----------------------")
+    print()
     for key, value in test_output.items():
-        print()
-        print(f"{key}: {value}")
+        print(f"    {key}:")
+        print("    "+"-" * len(f"{key}:"))
+        print(f"    {value}")
