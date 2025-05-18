@@ -20,7 +20,6 @@ class EnrollmentManager:
     Attributes
     ----------
     students : Set
-    courses : Set
 
     Methods
     -------
@@ -40,20 +39,11 @@ class EnrollmentManager:
         Uses the intersection() method from the Set class to return the intersection of students from two courses.   
     get_students_only_in_one_course(other, primary_course='a')
         Uses the difference() method from the Set class to return students who are only in one course.   
-    add_course(course)
-        Adds a course to the set of courses.   
-    remove_course(course)
-        Removes a course from the set of courses. 
-    get_all_courses()
-        Returns
-    get_courses_for_student(student)
-        Returns the courses a student is enrolled in by finding the intersection between all courses and the student's courses.    
     __str__()
         Returns a string listing all the students and courses            
     """
     def __init__(self):
         self.students = Set(get_student_id)
-        self.courses = Set()
 
 
     def write_roster(self, filename: str) -> None:
@@ -219,7 +209,7 @@ class EnrollmentManager:
         -------
         str
         """
-        return f"Students: {self.students}\nCourses: {self.courses}"
+        return f"Students: {self.students.to_list()}"
 
 
 if __name__ == "__main__":
