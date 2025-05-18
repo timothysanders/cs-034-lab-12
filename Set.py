@@ -134,8 +134,8 @@ class Set:
 
     def __iter__(self):
         """
-        Returns the minimum node in the BST
-        
+        Yield all elements via an in-oder traversal.
+
         Returns
         -------
         BSTNode
@@ -180,8 +180,10 @@ class Set:
                 return BSTNode(element, key)
             if key < node.key:
                 node.left = _insert(node.left, element, key)
+                node.left.parent = node
             elif key > node.key:
                 node.right = _insert(node.right, element, key)
+                node.right.parent = node
 
             return node
 
@@ -231,8 +233,7 @@ class Set:
 
         def _delete(node, key):
             if not node:
-                print("Empty Set")
-                return None               
+                return None
             if key < node.key:
                 node.left = _delete(node.left, key)
             elif key > node.key:
@@ -311,7 +312,7 @@ class Set:
     def to_list(self):
         return list(self)
 
-# define a concrete get_key_function() which can be used as arguement for Set constructor
+# define a concrete get_key_function() which can be used as argument for Set constructor
 def get_id_key(dictionary):
     """
     Returns the id key of an element in a dictionary.
