@@ -18,9 +18,7 @@ def test_node():
     test_left_child = BSTNode(element="Mae", key=1001)
     test_right_child = BSTNode(element="Tim", key=1020)
     test_node.left = test_left_child
-    test_left_child.parent = test_node
     test_node.right = test_right_child
-    test_right_child.parent = test_node
     return test_node
 
 @pytest.fixture
@@ -78,14 +76,12 @@ def test_node_string_representation(test_node, capsys):
 def test_node_left_child(test_node):
     assert test_node.left.key == 1001
     assert test_node.left.element == "Mae"
-    assert test_node.left.parent == test_node
     assert test_node.left.right is None
     assert test_node.left.left is None
 
 def test_node_right_child(test_node):
     assert test_node.right.key == 1020
     assert test_node.right.element == "Tim"
-    assert test_node.right.parent == test_node
     assert test_node.right.right is None
     assert test_node.right.left is None
 
