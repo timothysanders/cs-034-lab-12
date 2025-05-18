@@ -20,7 +20,7 @@ classDiagram
         +get_predecessor()
     }
     
-    class BSTSet {
+    class Set {
         -storage_root: BSTNode
         -get_key: function
         +__init__(get_key_function=None)
@@ -35,23 +35,23 @@ classDiagram
         +to_list()
     }
     
-    class CourseEnrollmentExtended {
-        -students: BSTSet
+    class EnrollmentManager {
+        -students: Set
         +__init__()
+        +__str__()
         +add_student(student)
         +remove_student(student)
         +find_student(student)
-        +get_common_students(other_course)
-        +get_students_only_in_course_a(other_course)
-        +get_students_only_in_course_b(other_course)
         +get_all_students(other_course)
+        +get_common_students(other_course)
+        +get_students_only_in_one_course(other_course, primary_course)
         +write_roster(filename)
-        +read_roster(filename, file_obj)
+        +read_roster(filename)
     }
     
     BSTNode --> BSTNode : parent, left, right
-    BSTSet o-- BSTNode : storage_root
-    CourseEnrollmentExtended --> BSTSet : students
+    Set o-- BSTNode : storage_root
+    EnrollmentManager --> Set : students
 ```
 
 ## Part 3: Data Flow Sketch
@@ -62,9 +62,9 @@ flowchart TD
         A2[courseB.csv]
     end
 
-    subgraph CourseEnrollment_Instances
-        B1[course_a: CourseEnrollment]
-        B2[course_b: CourseEnrollment]
+    subgraph EnrollmentManager_Instances
+        B1[course_a: EnrollmentManager]
+        B2[course_b: EnrollmentManager]
     end
 
     subgraph Read_And_Parse
@@ -79,8 +79,8 @@ flowchart TD
 
     subgraph Set_Operations
         E1["get_common_students()"]
-        E2["get_students_only_in_course_a()"]
-        E3["get_students_only_course_b()"]
+        E2["get_students_only_in_one_course()"]
+        E3["get_students_only_in_one_course()"]
         E4["get_all_students()"]
     end
 
